@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package g49803.atl.pentago.view;
+package g49803.atl.pentago.fxview;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -17,7 +12,7 @@ import javafx.stage.Stage;
  *
  * @author g49803
  */
-public class FxView extends Application {
+public class View extends Application {
     
     @Override
     public void start(Stage primaryStage) {
