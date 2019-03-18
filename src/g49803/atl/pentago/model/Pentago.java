@@ -11,10 +11,13 @@ public class Pentago {
     
     private List<Player> playerList;
     
+    private Player currentPlayer;
+    
     private final Board board;
     
     public Pentago() {
         this.playerList = new ArrayList<>(2);
+        this.currentPlayer = null;
         this.board = new Board();
     }
     
@@ -24,6 +27,10 @@ public class Pentago {
         } else {
             throw new Exception("To many player");
         }
+    }
+    
+    public void start() {
+        
     }
     
     public void placeMarble(int col, int row) {
