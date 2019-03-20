@@ -6,7 +6,7 @@ package g49803.atl.pentago.model;
  */
 public class Board {
     
-    private Marble[][] board;
+    private final Marble[][] board;
     
     public Board() {
         this.board = new Marble[6][6];
