@@ -20,5 +20,24 @@ public class Board {
         this.board[col][row] = marbleColor;
     }
     
+    public void turnQuadrant(QuadrantPosition quadPosition, boolean direction) {
+        
+    }
+    
+    @Override
+    public String toString() {
+        String description = "";
+        for (Marble[] marbles : board) {
+            for (Marble marble : marbles) {
+                if(marble == null) {
+                    description += " ";
+                } else {
+                    description += "O";
+                }
+            }
+            description += "\n";
+        }
+        return description;
+    }
     
 }

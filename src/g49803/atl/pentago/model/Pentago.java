@@ -9,31 +9,49 @@ import java.util.List;
  */
 public class Pentago {
     
-    private List<Player> playerList;
+    private final List<Player> playerList;
     
     private Player currentPlayer;
     
     private final Board board;
     
+    public void turnQuadrant(QuadrantPosition quadPos, boolean clockwiseRotationDirection) {
+        
+    }
+    
     public Pentago() {
-        this.playerList = new ArrayList<>(2);
-        this.currentPlayer = null;
-        this.board = new Board();
+        playerList = new ArrayList<>(2);
+        currentPlayer = null;
+        board = new Board();
+    }
+    
+    public List<Player> getPlayers() {
+        return playerList;
     }
     
     public void addPlayer(String name) throws Exception {
-        if (this.playerList.size() < 2) {
-            this.playerList.add(new Player(name));
+        if (playerList.size() < 2) {
+            playerList.add(new Player(name));
         } else {
             throw new Exception("To many player");
         }
     }
     
-    public void start() {
-        
+    public boolean isThereEnoughtPlayer() {
+        return playerList.size() < 2;
     }
     
-    public void placeMarble(int col, int row) {
-        
+    public void start() {
+        playerList.get(0).fillHand(Marble.WHITE);
+        playerList.get(1).fillHand(Marble.BLACK);
+        currentPlayer = playerList.get(0);
+    }
+    
+    public boolean isEnded() {
+        return !board.isEmptyCell(0, 0);
+    }
+    
+    public void placeMarble(int col, int row, Player player) {
+        board.fillCell(col, row, player.getMarble());
     }
 }
