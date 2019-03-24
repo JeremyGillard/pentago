@@ -15,10 +15,6 @@ public class Pentago {
     
     private final Board board;
     
-    public void turnQuadrant(QuadrantPosition quadPos, boolean clockwiseRotationDirection) {
-        
-    }
-    
     public Pentago() {
         playerList = new ArrayList<>(2);
         currentPlayer = null;
@@ -53,5 +49,13 @@ public class Pentago {
     
     public void placeMarble(int col, int row, Player player) {
         board.fillCell(col, row, player.getMarble());
+    }
+    
+    public void turnQuadrant(int quadrantPosition, boolean clockwiseRotationDirection) {
+        board.turnQuadrant(quadrantPosition, clockwiseRotationDirection);
+    }
+    
+    public Board getBoard() {
+        return board;
     }
 }

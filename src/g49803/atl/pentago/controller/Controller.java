@@ -34,17 +34,20 @@ public class Controller {
             while (!pentago.isEnded()) {
 
                 for (Player player : pentago.getPlayers()) {
-                    String[] marblePositionCmd = view.giveCoordinates();
-                    pentago.placeMarble(marblePositionCmd[0], marblePositionCmd[1], player);
+                    String[] marblePositionCmd = view.arrayCmd();
+                    pentago.placeMarble(Integer.parseInt(marblePositionCmd[0]), 
+                                        Integer.parseInt(marblePositionCmd[1]),
+                                        player);
                     view.displayBoard();
 
-                    String[] rotationQuadrantDirectionCmd = view.giveRotationDirection();
-                    pentago.turnQuadrant(rotationQuadrantDirectionCmd[0], rotationQuadrantDirectionCmd[1]);
+                    String[] rotationQuadrantDirectionCmd = view.arrayCmd();
+                    pentago.turnQuadrant(Integer.parseInt(rotationQuadrantDirectionCmd[0]), 
+                                         Boolean.parseBoolean(rotationQuadrantDirectionCmd[1]));
                     view.displayBoard();
                 }
 
             }
-        } while (view.takeRevenge);
+        } while (view.takeRevenge());
 
     }
 

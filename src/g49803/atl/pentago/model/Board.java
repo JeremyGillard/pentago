@@ -20,8 +20,12 @@ public class Board {
         this.board[col][row] = marbleColor;
     }
     
-    public void turnQuadrant(QuadrantPosition quadPosition, boolean direction) {
+    public void turnQuadrant(int quadrantPosition, boolean direction) {
         
+    }
+    
+    public Marble[][] getArrangement() {
+        return board;
     }
     
     @Override
