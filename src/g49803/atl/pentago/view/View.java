@@ -39,7 +39,6 @@ public class View {
         System.out.print(">> ");
         return this.in.nextLine().toLowerCase().split(" ");
     }
-
     
     public void displayBoard() {
         String description = "";

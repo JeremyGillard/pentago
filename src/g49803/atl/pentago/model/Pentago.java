@@ -44,7 +44,17 @@ public class Pentago {
     }
     
     public boolean isEnded() {
-        return !board.isEmptyCell(0, 0);
+        if (!board.isEmptyCell(0, 0)) {
+            return true;
+        }
+        for (Marble[] marbles : board.getArrangement()) {
+            for (Marble marble : marbles) {
+                if (marble == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
     public void placeMarble(int col, int row, Player player) {
