@@ -10,9 +10,9 @@ import java.util.Scanner;
  */
 public class View {
     
-    private Scanner in;
+    private final Scanner in;
     
-    private Pentago pentago;
+    private final Pentago pentago;
     
     public View(Pentago pentago) {
         this.in = new Scanner(System.in);
@@ -20,7 +20,8 @@ public class View {
     }
     
     public String askPlayerName() {
-        System.out.print("Votre nom svp : ");
+        System.out.print("Nom du joueur " + (pentago.getPlayers().size() + 1) 
+                + " : ");
         return in.nextLine();
     }
     
@@ -35,8 +36,22 @@ public class View {
         return response.equals("y");
     }
     
-    public String[] arrayCmd() {
-        System.out.print(">> ");
+    public String[] placeMarbleCmd() {
+        System.out.print("Marble placement of " 
+                + pentago.getCurrentPlayer().getName()
+                + " patern(int int)>> ");
+        return this.in.nextLine().toLowerCase().split(" ");
+    }
+    
+    public String[] turnQuadrantCmd() {
+        System.out.print("Quadrant Rotation of " 
+                + pentago.getCurrentPlayer().getName()
+                + " patern(int bool)>> ");
+        return this.in.nextLine().toLowerCase().split(" ");
+    }
+    
+    public String[] arrayCmd(String cmdType) {
+        System.out.print("(" + cmdType + ")>> ");
         return this.in.nextLine().toLowerCase().split(" ");
     }
     

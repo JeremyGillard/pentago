@@ -9,15 +9,15 @@ public class Board {
     private final Marble[][] board;
     
     public Board() {
-        this.board = new Marble[6][6];
+        board = new Marble[6][6];
     }
     
     public boolean isEmptyCell(int col, int row) {
-        return this.board[col][row] == null;
+        return board[col][row] == null;
     }
     
     public void fillCell(int col, int row, Marble marbleColor){
-        this.board[col][row] = marbleColor;
+        board[col][row] = marbleColor;
     }
     
     public void turnQuadrant(int quadrantPosition, boolean direction) {

@@ -5,8 +5,9 @@
  */
 package g49803.atl.pentago;
 
-import g49803.atl.pentago.model.Board;
-import g49803.atl.pentago.model.Marble;
+import g49803.atl.pentago.controller.Controller;
+import g49803.atl.pentago.model.Pentago;
+import g49803.atl.pentago.view.View;
 
 /**
  *
@@ -14,23 +15,13 @@ import g49803.atl.pentago.model.Marble;
  */
 public class Main {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
-        Board board = new Board();
+        Pentago pentago = new Pentago();
+        View view = new View(pentago);
+        Controller controller = new Controller(pentago, view);
         
-        System.out.println(board);
-        
-        System.out.println(board.isEmptyCell(0, 0));
-        
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
-                board.fillCell(0, 0, Marble.BLACK);
-            }
-        }
-        
-        System.out.println(board.isEmptyCell(0, 0));
-        
-        System.out.println(board);
+        controller.startGame();
         
     }
     

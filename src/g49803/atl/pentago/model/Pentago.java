@@ -15,6 +15,7 @@ public class Pentago {
     
     private final Board board;
     
+    
     public Pentago() {
         playerList = new ArrayList<>(2);
         currentPlayer = null;
@@ -43,6 +44,10 @@ public class Pentago {
         currentPlayer = playerList.get(0);
     }
     
+    public boolean isThereAWinner() {
+        return true;
+    }
+    
     public boolean isEnded() {
         if (!board.isEmptyCell(0, 0)) {
             return true;
@@ -57,7 +62,10 @@ public class Pentago {
         return true;
     }
     
-    public void placeMarble(int col, int row, Player player) {
+    public void placeMarble(int col, int row, Player player) throws Exception {
+        if (board.getArrangement()[col][row] != null) {
+            throw new Exception("Il y a déjà un marble à cet endroit");
+        }
         board.fillCell(col, row, player.getMarble());
     }
     
@@ -67,5 +75,9 @@ public class Pentago {
     
     public Board getBoard() {
         return board;
+    }
+    
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 }

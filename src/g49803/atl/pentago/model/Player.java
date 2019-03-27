@@ -11,7 +11,7 @@ public class Player {
     
     private final String name;
     
-    private List<Marble> marbles;
+    private final List<Marble> marbles;
     
     private boolean marblePlacement;
     
@@ -28,13 +28,21 @@ public class Player {
     }
     
     public void fillHand(Marble marbleColor) {
-        for (Marble marble : marbles) {
+        for (int i = 0; i < 18; i++) {
             marbles.add(marbleColor);
         }
     }
     
+    public List<Marble> getMarbles() {
+        return marbles;
+    }
+    
     public Marble getMarble() {
         return marbles.remove(0);
+    }
+    
+    public String getName() {
+        return name;
     }
     
     public boolean didPlayerPlaceAMarble() {
