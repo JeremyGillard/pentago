@@ -15,7 +15,7 @@ import g49803.atl.pentago.view.View;
  */
 public class Main {
     
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         
         Pentago pentago = new Pentago();
         View view = new View(pentago);

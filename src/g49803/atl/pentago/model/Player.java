@@ -1,55 +1,49 @@
 package g49803.atl.pentago.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- *
+ * This class represents a player who will take part in the pentago game.
+ * 
  * @author g49803
  */
 public class Player {
     
     private final String name;
     
-    private final List<Marble> marbles;
+    private Marble color;
     
-    private boolean marblePlacement;
-    
-    private boolean quadrantTurned;
-    
-    //les états marblePlacement et quadrantTurner peuvent éventuellement être placé dans la façade comme état du jeu.
-    
+    /**
+     * Create a player with a certain name.
+     * 
+     * @param name the name of the player.
+     */
     public Player(String name) {
         this.name = name;
-        this.marbles = new ArrayList<>(18);
-        //Quand le joueur commence il n'est pas obligé de tourner le quadrant du coup true au lieu de commencer à false.
-        this.marblePlacement = true;
-        this.quadrantTurned = true;
     }
     
-    public void fillHand(Marble marbleColor) {
-        for (int i = 0; i < 18; i++) {
-            marbles.add(marbleColor);
-        }
+    /**
+     * Sets the marble color of the player.
+     * 
+     * @param color the player's color.
+     */
+    public void setColor(Marble color) {
+        this.color = color;
     }
     
-    public List<Marble> getMarbles() {
-        return marbles;
+    /**
+     * Returns the player's color.
+     * 
+     * @return the player's color.
+     */
+    public Marble getColor() {
+        return color;
     }
     
-    public Marble getMarble() {
-        return marbles.remove(0);
-    }
-    
+    /**
+     * Returns the player's name.
+     * 
+     * @return the player's name.
+     */
     public String getName() {
         return name;
-    }
-    
-    public boolean didPlayerPlaceAMarble() {
-        return marblePlacement;
-    }
-    
-    public boolean didPlayerTurnAQuadrant() {
-        return quadrantTurned;
     }
 }
