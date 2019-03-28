@@ -1,4 +1,4 @@
-# AsciiPaint
+# Pentago
 
 ## Description
 
