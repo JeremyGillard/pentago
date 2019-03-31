@@ -19,7 +19,21 @@ public class View {
         this.pentago = pentago;
     }
     
-    /*
+    public String askForNewPlayer() {
+        System.out.print("Please enter a name : ");
+        return in.nextLine();
+    }
+    
+    public String[] placeMarbleCmd() {
+        System.out.print(">> ");
+        return this.in.nextLine().toLowerCase().split(" ");
+    }
+
+    public String[] turnQuadrantCmd() {
+        System.out.print(">> ");
+        return this.in.nextLine().toLowerCase().split(" ");
+    }
+    
     public void displayBoard() {
         String description = "";
         for (Marble[] marbles : pentago.getBoard().getArrangement()) {
@@ -38,6 +52,9 @@ public class View {
         }
         System.out.println(description);
     }
-*/
+    
+    public void displayWinner() {
+        System.out.println(pentago.getCurrentPlayer());
+    }
 
 }
