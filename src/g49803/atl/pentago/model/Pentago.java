@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * This class is the model representation of the pentago game.
+ * It is in itself a representation of the rules of the game.
+ * 
  * @author Jeremy Gillard
  */
 public class Pentago implements Observable {
@@ -23,12 +25,20 @@ public class Pentago implements Observable {
 
     private final List<Observer> observerList;
 
+    /**
+     * Allows to create a pentago game.
+     */
     public Pentago() {
         board = new Board();
         players = new ArrayList();
         observerList = new ArrayList();
     }
 
+    /**
+     * Add a player with a certain name to the game.
+     * 
+     * @param name of the player.
+     */
     public void addNewPlayer(String name) {
         if (players.size() < NB_MAX_PLAYER) {
             players.add(new Player(name));
@@ -37,10 +47,18 @@ public class Pentago implements Observable {
         }
     }
 
+    /**
+     * Returns true if there is enought player.
+     * 
+     * @return true if there is enought player.
+     */
     public boolean isThereEnoughPlayer() {
         return players.size() == NB_MAX_PLAYER;
     }
 
+    /**
+     * Allows to start the game.
+     */
     public void start() {
         players.get(0).setColor(Marble.WHITE);
         currentPlayer = players.get(0);
@@ -49,6 +67,12 @@ public class Pentago implements Observable {
         state = State.MARBLEPLACEMENT;
     }
 
+    /**
+     * Allows to place a marble on the board at coordinates (col, row).
+     * 
+     * @param col the column of the coordonitates
+     * @param row the row of the coordinates
+     */
     public void placeMarble(int col, int row) {
         checkState(State.MARBLEPLACEMENT);
         if (!board.isEmptyCell(col, row)) {
@@ -62,6 +86,14 @@ public class Pentago implements Observable {
         this.notifyObservers();
     }
 
+    /**
+     * Allows to turn a quadrant 1, 2, 3 or 4 in a certain direction;
+     * true -> clockwiseDirection
+     * false -> inverse of clockwiseDirection
+     * 
+     * @param quadrantNumber the quadrant to turn.
+     * @param clockwiseDirection the direction of the rotation.
+     */
     public void rotateQuadrant(int quadrantNumber, boolean clockwiseDirection) {
         checkState(State.QUADRANTROTATION);
         board.turnQuadrant(quadrantNumber, clockwiseDirection);
@@ -72,7 +104,6 @@ public class Pentago implements Observable {
         this.notifyObservers();
         nextPlayer();
     }
-
     private void nextPlayer() {
         checkState(State.NEXTPLAYER);
         if (players.get(0) == currentPlayer) {
@@ -90,18 +121,38 @@ public class Pentago implements Observable {
         }
     }
 
+    /**
+     * Returns the current player who have to play.
+     * 
+     * @return the current player who have to play.
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     * Returns true if a player has won.
+     * 
+     * @return true if a player has won.
+     */
     public boolean didAnyoneWin() {
         return board.getArrangement()[0][5] != null;
     }
 
+    /**
+     * Returns true if the game is over.
+     * 
+     * @return true if the game is over.
+     */
     public boolean isOver() {
         return didAnyoneWin();
     }
 
+    /**
+     * Returns the board of the game.
+     * 
+     * @return the board of the game.
+     */
     public Board getBoard() {
         return board;
     }
@@ -121,9 +172,5 @@ public class Pentago implements Observable {
         observerList.forEach((observer) -> {
             observer.update();
         });
-    }
-    
-    public State getState() {
-        return state;
     }
 }

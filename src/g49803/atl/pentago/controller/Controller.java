@@ -1,7 +1,6 @@
 package g49803.atl.pentago.controller;
 
 import g49803.atl.pentago.model.Pentago;
-import g49803.atl.pentago.model.State;
 import g49803.atl.pentago.model.StateGameException;
 import g49803.atl.pentago.view.View;
 
@@ -54,12 +53,7 @@ public class Controller {
                 pentago.rotateQuadrant(Integer.parseInt(turnQuadrantCmd[0]),
                         Boolean.parseBoolean(turnQuadrantCmd[1]));
             } catch (StateGameException e) {
-                if (pentago.getState() == State.ENDED) {
-                    break;
-                } else {
-                    e.getMessage();
-                }
-                    
+                break;
             }
 
         }

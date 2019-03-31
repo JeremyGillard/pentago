@@ -1,10 +1,12 @@
 package g49803.atl.pentago.model;
 
 /**
- *
+ * this class represents the states in which the pentago game can be found.
+ * 
  * @author Jeremy Gillard
  */
 public enum State {
+    
     MARBLEPLACEMENT("place a marble"),
     QUADRANTROTATION("turn a quadrant"),
     NEXTPLAYER("move on the next player"), 

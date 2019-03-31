@@ -83,20 +83,4 @@ public class Board {
         return board;
     }
 
-    @Override
-    public String toString() {
-        String description = "";
-        for (Marble[] marbles : board) {
-            for (Marble marble : marbles) {
-                if (marble == null) {
-                    description += " ";
-                } else {
-                    description += "O";
-                }
-            }
-            description += "\n";
-        }
-        return description;
-    }
-
 }
