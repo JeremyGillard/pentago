@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author g49803
+ * @author Jeremy Gillard
  */
 public class View extends Application {
     

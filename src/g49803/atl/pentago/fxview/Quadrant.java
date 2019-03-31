@@ -17,7 +17,7 @@ import javafx.scene.shape.Rectangle;
 
 /**
  *
- * @author Jeremy
+ * @author Jeremy Gillard
  */
 public class Quadrant extends Group {
     

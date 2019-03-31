@@ -1,12 +1,14 @@
 package g49803.atl.pentago.controller;
 
 import g49803.atl.pentago.model.Pentago;
+import g49803.atl.pentago.model.State;
+import g49803.atl.pentago.model.StateGameException;
 import g49803.atl.pentago.view.View;
 
 /**
  * It's in this class that the dynamics of the game operate.
- * 
- * @author g49803
+ *
+ * @author Jeremy Gillard
  */
 public class Controller {
 
@@ -20,7 +22,6 @@ public class Controller {
      * @param pentago the game concerned.
      * @param view the view concerned.
      */
-
     public Controller(Pentago pentago, View view) {
         this.pentago = pentago;
         this.view = view;
@@ -38,25 +39,31 @@ public class Controller {
                 System.out.println(e.getMessage());
             }
         }
-        
+
         pentago.start();
         pentago.addObserver(view);
-        
+
         while (!pentago.isOver()) {
-            
-            String[] placeMarbleCmd = view.placeMarbleCmd();
-            pentago.placeMarble(Integer.parseInt(placeMarbleCmd[0]), 
-                                Integer.parseInt(placeMarbleCmd[1]));
-//            view.displayBoard();
-            
-            String[] turnQuadrantCmd = view.turnQuadrantCmd();
-            pentago.rotateQuadrant(Integer.parseInt(turnQuadrantCmd[0]),
-                                   Boolean.parseBoolean(turnQuadrantCmd[1]));
-//            view.displayBoard();
-            
-            
+
+            try {
+                String[] placeMarbleCmd = view.placeMarbleCmd();
+                pentago.placeMarble(Integer.parseInt(placeMarbleCmd[0]),
+                        Integer.parseInt(placeMarbleCmd[1]));
+
+                String[] turnQuadrantCmd = view.turnQuadrantCmd();
+                pentago.rotateQuadrant(Integer.parseInt(turnQuadrantCmd[0]),
+                        Boolean.parseBoolean(turnQuadrantCmd[1]));
+            } catch (StateGameException e) {
+                if (pentago.getState() == State.ENDED) {
+                    break;
+                } else {
+                    e.getMessage();
+                }
+                    
+            }
+
         }
-        
+
         view.displayWinner();
 
     }

@@ -3,7 +3,7 @@ package g49803.atl.pentago.model;
 /**
  * This class represents a player who will take part in the pentago game.
  *
- * @author g49803
+ * @author Jeremy Gillard
  */
 public class Player {
 

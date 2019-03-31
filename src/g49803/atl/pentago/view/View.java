@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author g49803
+ * @author Jeremy Gillard
  */
 public class View implements Observer {
     
@@ -36,7 +36,7 @@ public class View implements Observer {
     }
     
     public void displayWinner() {
-        System.out.println(pentago.getCurrentPlayer());
+        System.out.println("The winner is " + pentago.getCurrentPlayer().getName());
     }
 
     @Override

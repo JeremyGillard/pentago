@@ -8,7 +8,7 @@ import g49803.atl.pentago.view.View;
  * This class is the focus of our application. It's in charge of launching the
  * game. Creating the model, the view and the controller by binding them.
  *
- * @author g49803
+ * @author Jeremy Gillard
  */
 public class Main {
     

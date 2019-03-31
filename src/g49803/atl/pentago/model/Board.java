@@ -3,7 +3,7 @@ package g49803.atl.pentago.model;
 /**
  * Represents the board of the pentago game.
  * 
- * @author g49803
+ * @author Jeremy Gillard
  */
 public class Board {
     

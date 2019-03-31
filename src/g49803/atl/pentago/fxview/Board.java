@@ -13,7 +13,7 @@ import javafx.scene.shape.Circle;
 
 /**
  *
- * @author Jeremy
+ * @author Jeremy Gillard
  */
 public class Board extends GridPane {
 

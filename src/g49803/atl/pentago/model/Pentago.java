@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  *
- * @author g49803
+ * @author Jeremy Gillard
  */
 public class Pentago implements Observable {
 
@@ -19,12 +19,8 @@ public class Pentago implements Observable {
 
     private Player currentPlayer;
 
-    private boolean placeMarble;
+    private State state;
 
-    private boolean turnQuadrant;
-
-    private boolean ended;
-    
     private final List<Observer> observerList;
 
     public Pentago() {
@@ -40,7 +36,7 @@ public class Pentago implements Observable {
             throw new RuntimeException("There is enough player for this game");
         }
     }
-    
+
     public boolean isThereEnoughPlayer() {
         return players.size() == NB_MAX_PLAYER;
     }
@@ -49,73 +45,63 @@ public class Pentago implements Observable {
         players.get(0).setColor(Marble.WHITE);
         currentPlayer = players.get(0);
         players.get(1).setColor(Marble.BLACK);
-        placeMarble = false;
-        turnQuadrant = false;
-        ended = false;
+
+        state = State.MARBLEPLACEMENT;
     }
 
     public void placeMarble(int col, int row) {
-        if (ended) {
-            throw new RuntimeException("It's not possible to place a marble if "
-                    + "the game is ended.");
-        }
-        if (placeMarble) {
-            throw new RuntimeException("There is already a marble placed for "
-                    + "this player");
-        }
+        checkState(State.MARBLEPLACEMENT);
         if (!board.isEmptyCell(col, row)) {
             throw new RuntimeException("There is already a marble in this cell");
         }
         board.fillCell(col, row, currentPlayer.getColor());
-        placeMarble = true;
+        state = State.QUADRANTROTATION;
         if (didAnyoneWin()) {
-            ended = true;
+            state = State.ENDED;
         }
         this.notifyObservers();
     }
 
     public void rotateQuadrant(int quadrantNumber, boolean clockwiseDirection) {
-        if (ended) {
-            throw new RuntimeException("It's not possible to turn a quadrant if "
-                    + "the game is ended.");
-        }
-        if (turnQuadrant) {
-            throw new RuntimeException("A quandrant has already been turned at "
-                    + "this state of the game");
-        }
+        checkState(State.QUADRANTROTATION);
         board.turnQuadrant(quadrantNumber, clockwiseDirection);
-        turnQuadrant = true;
+        state = State.NEXTPLAYER;
         if (didAnyoneWin()) {
-            ended = true;
+            state = State.ENDED;
         }
         this.notifyObservers();
         nextPlayer();
     }
 
     private void nextPlayer() {
-        if (placeMarble && turnQuadrant) {
-            if (players.get(0) == currentPlayer) {
-                currentPlayer = players.get(1);
-            } else {
-                currentPlayer = players.get(0);
-            }
-            placeMarble = false;
-            turnQuadrant = false;
+        checkState(State.NEXTPLAYER);
+        if (players.get(0) == currentPlayer) {
+            currentPlayer = players.get(1);
+        } else {
+            currentPlayer = players.get(0);
         }
+        state = State.MARBLEPLACEMENT;
     }
     
+    private void checkState(State stateTest) {
+        if (state != stateTest) {
+            throw new StateGameException("inconsistent game status to "
+                    + stateTest);
+        }
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
     public boolean didAnyoneWin() {
-        return false;
+        return board.getArrangement()[0][5] != null;
     }
 
     public boolean isOver() {
-        return false;
+        return didAnyoneWin();
     }
-    
+
     public Board getBoard() {
         return board;
     }
@@ -132,8 +118,12 @@ public class Pentago implements Observable {
 
     @Override
     public void notifyObservers() {
-        for (Observer observer : observerList) {
+        observerList.forEach((observer) -> {
             observer.update();
-        }
+        });
+    }
+    
+    public State getState() {
+        return state;
     }
 }

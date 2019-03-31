@@ -2,7 +2,7 @@ package g49803.atl.pentago.util;
 
 /**
  *
- * @author g49803
+ * @author Jeremy Gillard
  */
 public interface  Observer {
     
