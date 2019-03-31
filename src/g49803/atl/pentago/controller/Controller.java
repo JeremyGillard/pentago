@@ -28,7 +28,10 @@ public class Controller {
             }
         }
         
+        pentago.start();
+        
         while (!pentago.isOver()) {
+            
             String[] placeMarbleCmd = view.placeMarbleCmd();
             pentago.placeMarble(Integer.parseInt(placeMarbleCmd[0]), 
                                 Integer.parseInt(placeMarbleCmd[1]));

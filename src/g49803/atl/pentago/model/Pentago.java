@@ -42,9 +42,11 @@ public class Pentago {
     }
 
     public void start() {
-        players.get(0).fillHand(Marble.WHITE);
+        players.get(0).setColor(Marble.WHITE);
+//        players.get(0).fillHand(Marble.WHITE);
         currentPlayer = players.get(0);
-        players.get(1).fillHand(Marble.BLACK);
+        players.get(1).setColor(Marble.BLACK);
+//        players.get(1).fillHand(Marble.BLACK);
         placeMarble = false;
         turnQuadrant = false;
         ended = false;
@@ -62,7 +64,7 @@ public class Pentago {
         if (!board.isEmptyCell(col, row)) {
             throw new RuntimeException("There is already a marble in this cell");
         }
-        board.fillCell(col, row, currentPlayer.getAMarble());
+        board.fillCell(col, row, currentPlayer.getColor());
         if (didAnyoneWin()) {
             ended = true;
         }
@@ -86,7 +88,7 @@ public class Pentago {
 
     private void nextPlayer() {
         if (placeMarble && turnQuadrant) {
-            if (currentPlayer == players.get(0)) {
+            if (players.get(0) == currentPlayer) {
                 currentPlayer = players.get(1);
             } else {
                 currentPlayer = players.get(0);

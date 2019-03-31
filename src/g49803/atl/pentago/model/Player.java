@@ -14,7 +14,7 @@ public class Player {
 
     private Marble color;
 
-    private List<Marble> marbles;
+//    private List<Marble> marbles;
 
     /**
      * Create a player with a certain name.
@@ -23,24 +23,24 @@ public class Player {
      */
     public Player(String name) {
         this.name = name;
-        marbles = new ArrayList();
+//        marbles = new ArrayList();
     }
 
-    public void fillHand(Marble color) {
-        if (color == Marble.BLACK) {
-            for (int i = 0; i < 18; i++) {
-                marbles.add(Marble.BLACK);
-            }
-        } else {
-            for (int i = 0; i < 18; i++) {
-                marbles.add(Marble.WHITE);
-            }
-        }
-    }
-
-    public Marble getAMarble() {
-        return marbles.remove(0);
-    }
+//    public void fillHand(Marble color) {
+//        if (color == Marble.BLACK) {
+//            for (int i = 0; i < 18; i++) {
+//                marbles.add(Marble.BLACK);
+//            }
+//        } else {
+//            for (int i = 0; i < 18; i++) {
+//                marbles.add(Marble.WHITE);
+//            }
+//        }
+//    }
+//    
+//    public Marble getAMarble() {
+//        return marbles.remove(0);
+//    }
 
     /**
      * Sets the marble color of the player.
