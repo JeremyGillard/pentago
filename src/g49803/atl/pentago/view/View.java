@@ -2,13 +2,14 @@ package g49803.atl.pentago.view;
 
 import g49803.atl.pentago.model.Marble;
 import g49803.atl.pentago.model.Pentago;
+import g49803.atl.pentago.util.Observer;
 import java.util.Scanner;
 
 /**
  *
  * @author g49803
  */
-public class View {
+public class View implements Observer {
     
     private final Scanner in;
     
@@ -25,16 +26,25 @@ public class View {
     }
     
     public String[] placeMarbleCmd() {
-        System.out.print(">> ");
+        System.out.print("(Marble placement by " + pentago.getCurrentPlayer().getName() +")>> ");
         return this.in.nextLine().toLowerCase().split(" ");
     }
 
     public String[] turnQuadrantCmd() {
-        System.out.print(">> ");
+        System.out.print("(Quadrant rotation by " + pentago.getCurrentPlayer().getName() +")>> ");
         return this.in.nextLine().toLowerCase().split(" ");
     }
     
-    public void displayBoard() {
+    public void displayWinner() {
+        System.out.println(pentago.getCurrentPlayer());
+    }
+
+    @Override
+    public void update() {
+        displayBoard();
+    }
+    
+    private void displayBoard() {
         String description = "";
         for (Marble[] marbles : pentago.getBoard().getArrangement()) {
             for (Marble marble : marbles) {
@@ -51,10 +61,6 @@ public class View {
             description += "\n";
         }
         System.out.println(description);
-    }
-    
-    public void displayWinner() {
-        System.out.println(pentago.getCurrentPlayer());
     }
 
 }

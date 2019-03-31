@@ -1,14 +1,15 @@
 package g49803.atl.pentago.model;
 
+import g49803.atl.pentago.util.Observable;
+import g49803.atl.pentago.util.Observer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  *
  * @author g49803
  */
-public class Pentago {
+public class Pentago implements Observable {
 
     private final int NB_MAX_PLAYER = 2;
 
@@ -23,10 +24,13 @@ public class Pentago {
     private boolean turnQuadrant;
 
     private boolean ended;
+    
+    private final List<Observer> observerList;
 
     public Pentago() {
         board = new Board();
         players = new ArrayList();
+        observerList = new ArrayList();
     }
 
     public void addNewPlayer(String name) {
@@ -43,10 +47,8 @@ public class Pentago {
 
     public void start() {
         players.get(0).setColor(Marble.WHITE);
-//        players.get(0).fillHand(Marble.WHITE);
         currentPlayer = players.get(0);
         players.get(1).setColor(Marble.BLACK);
-//        players.get(1).fillHand(Marble.BLACK);
         placeMarble = false;
         turnQuadrant = false;
         ended = false;
@@ -65,9 +67,11 @@ public class Pentago {
             throw new RuntimeException("There is already a marble in this cell");
         }
         board.fillCell(col, row, currentPlayer.getColor());
+        placeMarble = true;
         if (didAnyoneWin()) {
             ended = true;
         }
+        this.notifyObservers();
     }
 
     public void rotateQuadrant(int quadrantNumber, boolean clockwiseDirection) {
@@ -80,9 +84,11 @@ public class Pentago {
                     + "this state of the game");
         }
         board.turnQuadrant(quadrantNumber, clockwiseDirection);
+        turnQuadrant = true;
         if (didAnyoneWin()) {
             ended = true;
         }
+        this.notifyObservers();
         nextPlayer();
     }
 
@@ -99,7 +105,7 @@ public class Pentago {
     }
     
     public Player getCurrentPlayer() {
-        return (Player) currentPlayer;
+        return currentPlayer;
     }
 
     public boolean didAnyoneWin() {
@@ -112,5 +118,22 @@ public class Pentago {
     
     public Board getBoard() {
         return board;
+    }
+
+    @Override
+    public void addObserver(Observer obs) {
+        observerList.add(obs);
+    }
+
+    @Override
+    public void removeObserver(Observer obs) {
+        observerList.remove(obs);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observerList) {
+            observer.update();
+        }
     }
 }
