@@ -60,6 +60,10 @@ public class Pentago implements Observable {
      * Allows to start the game.
      */
     public void start() {
+        if (!isThereEnoughPlayer()) {
+            throw new RuntimeException("There is not enough player"
+                    + " to play this game");
+        }
         players.get(0).setColor(Marble.WHITE);
         currentPlayer = players.get(0);
         players.get(1).setColor(Marble.BLACK);
@@ -104,6 +108,7 @@ public class Pentago implements Observable {
         this.notifyObservers();
         nextPlayer();
     }
+    
     private void nextPlayer() {
         checkState(State.NEXTPLAYER);
         if (players.get(0) == currentPlayer) {
