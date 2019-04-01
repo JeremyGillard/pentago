@@ -2,6 +2,8 @@ package g49803.atl.pentago.fxview;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -13,7 +15,12 @@ public class View extends Application {
     @Override
     public void start(Stage primaryStage) {
         
-        Board root = new Board();
+        //effet light spot et lightning
+        Label label = new Label("Current Player : ");
+        Board board = new Board();
+        
+        VBox root = new VBox();
+        root.getChildren().addAll(label, board);
         
         Scene scene = new Scene(root, 800, 800);
         

@@ -32,6 +32,7 @@ public class Quadrant extends Group {
         initContent();
         initCore();
         fixContent();
+        
     }
 
     private void initCore() {
@@ -72,10 +73,6 @@ public class Quadrant extends Group {
     
     private void fixContent() {
         this.getChildren().add(core);
-    }
-    
-    public StackPane getCore() {
-        return core;
     }
 
 }
