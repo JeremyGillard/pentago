@@ -12,6 +12,13 @@ import javafx.stage.Stage;
  */
 public class View extends Application {
     
+    /**
+     * The main entry point for all JavaFX applications. 
+     * The start method is called after the init method has returned, and after 
+     * the system is ready for the application to begin running. 
+     * 
+     * @param primaryStage 
+     */
     @Override
     public void start(Stage primaryStage) {
         
