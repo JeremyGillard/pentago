@@ -7,13 +7,15 @@ package g49803.atl.pentago.model;
  */
 public class Board {
 
+    private final static int SIDE = 6;
+    
     private final Marble[][] board;
 
     /**
      * Allows to create a 6x6 board.
      */
     public Board() {
-        board = new Marble[6][6];
+        board = new Marble[SIDE][SIDE];
     }
 
     /**
@@ -24,7 +26,7 @@ public class Board {
      * @param row the row concerned.
      * @return true if the cell concerned is empty.
      */
-    public boolean isEmptyCell(int col, int row) {
+    boolean isEmptyCell(int col, int row) {
         return board[col][row] == null;
     }
 
@@ -36,7 +38,7 @@ public class Board {
      * @param row the row concerned.
      * @param marbleColor the marble color to place in the cell.
      */
-    public void fillCell(int col, int row, Marble marbleColor) {
+    void fillCell(int col, int row, Marble marbleColor) {
         board[col][row] = marbleColor;
     }
 
@@ -47,7 +49,7 @@ public class Board {
      * @param quadrantPosition the quadrant to be turned.
      * @param direction the direction in which to turn the quadrant.
      */
-    public void turnQuadrant(int quadrantPosition, boolean direction) {
+    void turnQuadrant(int quadrantPosition, boolean direction) {
         //only for the 1st delivery
         String description = "Quadrant ";
         switch (quadrantPosition) {
@@ -74,6 +76,7 @@ public class Board {
         System.out.println(description);
     }
 
+    //A supprimer, préférer donner des getters pour la hauteur et la largeur
     /**
      * Returns the tab[][] representation of the board.
      *
@@ -81,6 +84,15 @@ public class Board {
      */
     public Marble[][] getArrangement() {
         return board;
+    }
+    
+    /**
+     * Returns the length side of the board.
+     * 
+     * @return the length side of the board.
+     */
+    public int getSideBoard() {
+        return SIDE;
     }
 
 }

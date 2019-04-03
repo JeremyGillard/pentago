@@ -45,7 +45,7 @@ public class PentagoTest {
         pentago.placeMarble(0, 0);
     }
     
-    @Test (expected = StateGameException.class)
+    @Test (expected = GameStateException.class)
     public void placeMarbleWrongState() {
         Pentago pentago = new Pentago();
         pentago.addNewPlayer("Homer");
@@ -53,7 +53,7 @@ public class PentagoTest {
         pentago.placeMarble(0, 0);
     }
     
-    @Test (expected = StateGameException.class)
+    @Test (expected = GameStateException.class)
     public void rotateQuadrantWrongState() {
         Pentago pentago = new Pentago();
         pentago.addNewPlayer("Homer");

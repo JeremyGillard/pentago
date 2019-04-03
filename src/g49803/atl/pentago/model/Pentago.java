@@ -119,7 +119,7 @@ public class Pentago implements Observable {
     
     private void checkState(State stateTest) {
         if (state != stateTest) {
-            throw new StateGameException("inconsistent game status to "
+            throw new GameStateException("inconsistent game status to "
                     + stateTest);
         }
     }
