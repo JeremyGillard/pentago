@@ -61,7 +61,7 @@ public class Pentago implements Observable {
      */
     public void start() {
         if (!isThereEnoughPlayer()) {
-            throw new RuntimeException("There is not enough player"
+            throw new IllegalStateException("There is not enough player"
                     + " to play this game");
         }
         players.get(0).setColor(Marble.WHITE);
@@ -80,7 +80,8 @@ public class Pentago implements Observable {
     public void placeMarble(int col, int row) {
         checkState(State.PLACEMENT);
         if (!board.isEmptyCell(col, row)) {
-            throw new RuntimeException("There is already a marble in this cell");
+            throw new IllegalArgumentException("There is already a marble "
+                    + "in this cell");
         }
         board.fillCell(col, row, currentPlayer.getColor());
         state = State.ROTATION;
