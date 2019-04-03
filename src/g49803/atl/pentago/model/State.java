@@ -7,10 +7,9 @@ package g49803.atl.pentago.model;
  */
 public enum State {
     
-    MARBLEPLACEMENT("place a marble"),
-    QUADRANTROTATION("turn a quadrant"),
-    NEXTPLAYER("move on the next player"), 
-    ENDED("finish the game");
+    PLACEMENT("place a marble"),
+    ROTATION("turn a quadrant"),
+    OVER("finish the game");
     
     private final String communicationSate;
     

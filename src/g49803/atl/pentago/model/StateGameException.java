@@ -4,7 +4,7 @@ package g49803.atl.pentago.model;
  *
  * @author Jeremy Gillard
  */
-public class StateGameException extends RuntimeException {
+public class StateGameException extends IllegalStateException {
     
     /**
      * Creates a new instance of <code>StateGameException</code> without detail
