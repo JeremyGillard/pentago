@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g49803.atl.pentago.fxview;
 
 import javafx.geometry.HPos;
@@ -11,11 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 
-/**
- *
- * @author Jeremy Gillard
- */
-public class Board extends GridPane {
+class Board extends GridPane {
 
     private Quadrant quadrantI;
     private Quadrant quadrantII;
@@ -34,7 +25,7 @@ public class Board extends GridPane {
     private Button quadIVLeft;
     private Button quadIVRight;
 
-    public Board() {
+    Board() {
         initContent();
         initBoard();
     }
