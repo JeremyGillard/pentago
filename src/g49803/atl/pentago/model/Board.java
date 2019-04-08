@@ -7,6 +7,8 @@ package g49803.atl.pentago.model;
  */
 public class Board {
 
+    private final static int SIDE = 6;
+    
     private final Marble[][] board;
 
     /**
@@ -26,7 +28,7 @@ public class Board {
      * @param row the row concerned.
      * @return true if the cell concerned is empty.
      */
-    public boolean isEmptyCell(int col, int row) {
+    boolean isEmptyCell(int col, int row) {
         return board[col][row] == null;
     }
 
@@ -38,7 +40,7 @@ public class Board {
      * @param row the row concerned.
      * @param marbleColor the marble color to place in the cell.
      */
-    public void fillCell(int col, int row, Marble marbleColor) {
+    void fillCell(int col, int row, Marble marbleColor) {
         board[col][row] = marbleColor;
     }
 
@@ -49,7 +51,7 @@ public class Board {
      * @param quadrantPosition the quadrant to be turned.
      * @param direction the direction in which to turn the quadrant.
      */
-    public void turnQuadrant(int quadrantPosition, boolean direction) {
+    void turnQuadrant(int quadrantPosition, boolean direction) {
         //only for the 1st delivery
         String description = "Quadrant ";
         switch (quadrantPosition) {
@@ -85,6 +87,15 @@ public class Board {
      */
     public Marble getMarbleAtPosition(int x, int y) {
         return board[x][y];
+    }
+    
+    /**
+     * Returns the length side of the board.
+     * 
+     * @return the length side of the board.
+     */
+    public int getSideBoard() {
+        return SIDE;
     }
 
 }

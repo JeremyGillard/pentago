@@ -66,14 +66,14 @@ public class Pentago implements Observable {
      */
     public void start() {
         if (!isThereEnoughPlayer()) {
-            throw new RuntimeException("There is not enough player"
+            throw new IllegalStateException("There is not enough player"
                     + " to play this game");
         }
         players.get(0).setColor(Marble.WHITE);
         currentPlayer = players.get(0);
         players.get(1).setColor(Marble.BLACK);
 
-        state = State.MARBLEPLACEMENT;
+        state = State.PLACEMENT;
     }
 
     /**
@@ -83,18 +83,19 @@ public class Pentago implements Observable {
      * @param row the row of the coordinates
      */
     public void placeMarble(int col, int row) {
-        checkState(State.MARBLEPLACEMENT);
+        checkState(State.PLACEMENT);
         if (!board.isEmptyCell(col, row)) {
-            throw new RuntimeException("There is already a marble in this cell");
+            throw new IllegalArgumentException("There is already a marble "
+                    + "in this cell");
         }
         if (col >= BOARD_SIDE || row >= BOARD_SIDE) {
             throw new IllegalArgumentException("The coordinates entered "
                     + "are outside the area covered by the board");
         }
         board.fillCell(col, row, currentPlayer.getColor());
-        state = State.QUADRANTROTATION;
+        state = State.ROTATION;
         if (didAnyoneWin()) {
-            state = State.ENDED;
+            state = State.OVER;
         }
         this.notifyObservers();
     }
@@ -108,32 +109,30 @@ public class Pentago implements Observable {
      * @param clockwiseDirection the direction of the rotation.
      */
     public void rotateQuadrant(int quadrantNumber, boolean clockwiseDirection) {
-        checkState(State.QUADRANTROTATION);
+        checkState(State.ROTATION);
         if (quadrantNumber < 0 || quadrantNumber > 4) {
             throw new IllegalArgumentException("The number of quadrant does not exist, it will be between 1 and 4");
         }
         board.turnQuadrant(quadrantNumber, clockwiseDirection);
-        state = State.NEXTPLAYER;
         if (didAnyoneWin()) {
-            state = State.ENDED;
+            state = State.OVER;
         }
         this.notifyObservers();
         nextPlayer();
     }
     
     private void nextPlayer() {
-        checkState(State.NEXTPLAYER);
         if (players.get(0) == currentPlayer) {
             currentPlayer = players.get(1);
         } else {
             currentPlayer = players.get(0);
         }
-        state = State.MARBLEPLACEMENT;
+        state = State.PLACEMENT;
     }
     
     private void checkState(State stateTest) {
         if (state != stateTest) {
-            throw new StateGameException("inconsistent game status to "
+            throw new GameStateException("inconsistent game status to "
                     + stateTest);
         }
     }
