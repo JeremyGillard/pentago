@@ -47,9 +47,9 @@ public class View implements Observer {
      */
     public String[] placeMarbleCmd() {
         System.out.print("Marble placement by " + 
-                pentago.getCurrentPlayer().getName() +"\treponse pattern: \"number number\" >> ");
+                pentago.getCurrentPlayer().getName() +"\treponse pattern: \"number[0-5] number[0-5]\" >> ");
         
-        Pattern pattern = Pattern.compile("[0-9] [0-9]");
+        Pattern pattern = Pattern.compile("[0-5] [0-5]");
         String userInput = in.nextLine();
         
         while (!pattern.matcher(userInput).matches()) {
