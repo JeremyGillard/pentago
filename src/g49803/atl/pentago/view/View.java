@@ -27,12 +27,13 @@ public class View implements Observer {
     }
     
     /**
-     * asks for the name of the player who will be added and returns it.
+     * Asks for the name of the player who will be added and returns it.
      * 
      * @return the player's name.
      */
     public String askForNewPlayer() {
-        System.out.print("Please enter a name : ");
+        System.out.print("Please enter the name of the player number " 
+                + pentago.getNbPlayer() + " : ");
         return in.nextLine();
     }
     

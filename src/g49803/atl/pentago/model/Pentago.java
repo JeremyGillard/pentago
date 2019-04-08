@@ -14,6 +14,8 @@ import java.util.List;
 public class Pentago implements Observable {
 
     private final int NB_MAX_PLAYER = 2;
+    
+    private static int nbPlayer = 0;
 
     private final Board board;
 
@@ -42,6 +44,7 @@ public class Pentago implements Observable {
     public void addNewPlayer(String name) {
         if (players.size() < NB_MAX_PLAYER) {
             players.add(new Player(name));
+            nbPlayer++;
         } else {
             throw new RuntimeException("There is enough player for this game");
         }
@@ -160,6 +163,15 @@ public class Pentago implements Observable {
      */
     public Board getBoard() {
         return board;
+    }
+    
+    /**
+     * Returns the number of player added to the game.
+     * 
+     * @return the number of player added to the game.
+     */
+    public int getNbPlayer() {
+        return nbPlayer;
     }
 
     @Override
