@@ -4,6 +4,7 @@ import g49803.atl.pentago.model.Marble;
 import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.util.Observer;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * This class allows to display the Pentago game in the terminal.
@@ -45,9 +46,19 @@ public class View implements Observer {
      * in the terminal as a string array.
      */
     public String[] placeMarbleCmd() {
-        System.out.print("(Marble placement by " + 
-                pentago.getCurrentPlayer().getName() +")>> ");
-        return this.in.nextLine().toLowerCase().split(" ");
+        System.out.print("Marble placement by " + 
+                pentago.getCurrentPlayer().getName() +"\treponse pattern: \"number number\" >> ");
+        
+        Pattern pattern = Pattern.compile("[0-9] [0-9]");
+        String userInput = in.nextLine();
+        
+        while (!pattern.matcher(userInput).matches()) {
+            System.out.println("Sorry, you have to enter this pattern: \"number number\". Try again");
+            System.out.print("Marble placement by " + 
+                pentago.getCurrentPlayer().getName() +" >> ");
+            userInput = in.nextLine();
+        }
+        return userInput.split(" ");
     }
 
     /**
@@ -58,9 +69,20 @@ public class View implements Observer {
      * as a string array.
      */
     public String[] turnQuadrantCmd() {
-        System.out.print("(Quadrant rotation by " 
-                + pentago.getCurrentPlayer().getName() +")>> ");
-        return this.in.nextLine().toLowerCase().split(" ");
+        
+        System.out.print("Marble placement by " + 
+                pentago.getCurrentPlayer().getName() +"\treponse pattern: \"quadrantNumber[1-4] clockWise[0-1]\" >> ");
+        
+        Pattern pattern = Pattern.compile("[1-4] [0-1]");
+        String userInput = in.nextLine();
+        
+        while (!pattern.matcher(userInput).matches()) {
+            System.out.println("Sorry, you have to enter this pattern: \"quadrantNumber[1-4] clockWise[0-1]\". Try again");
+            System.out.print("Marble placement by " + 
+                pentago.getCurrentPlayer().getName() +" >> ");
+            userInput = in.nextLine();
+        }
+        return userInput.split(" ");
     }
     
     /**
