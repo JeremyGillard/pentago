@@ -15,6 +15,8 @@ public class Pentago implements Observable {
 
     private final int NB_MAX_PLAYER = 2;
     
+    private final int BOARD_SIDE = 6;
+    
     private static int playerNbAssignement = 1;
 
     private final Board board;
@@ -31,7 +33,7 @@ public class Pentago implements Observable {
      * Allows to create a pentago game.
      */
     public Pentago() {
-        board = new Board();
+        board = new Board(BOARD_SIDE);
         players = new ArrayList();
         observerList = new ArrayList();
     }
@@ -85,6 +87,10 @@ public class Pentago implements Observable {
         if (!board.isEmptyCell(col, row)) {
             throw new RuntimeException("There is already a marble in this cell");
         }
+        if (col >= BOARD_SIDE || row >= BOARD_SIDE) {
+            throw new IllegalArgumentException("The coordinates entered "
+                    + "are outside the area covered by the board");
+        }
         board.fillCell(col, row, currentPlayer.getColor());
         state = State.QUADRANTROTATION;
         if (didAnyoneWin()) {
@@ -103,6 +109,9 @@ public class Pentago implements Observable {
      */
     public void rotateQuadrant(int quadrantNumber, boolean clockwiseDirection) {
         checkState(State.QUADRANTROTATION);
+        if (quadrantNumber < 0 || quadrantNumber > 4) {
+            throw new IllegalArgumentException("The number of quadrant does not exist, it will be between 1 and 4");
+        }
         board.turnQuadrant(quadrantNumber, clockwiseDirection);
         state = State.NEXTPLAYER;
         if (didAnyoneWin()) {

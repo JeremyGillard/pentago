@@ -70,7 +70,7 @@ public class View implements Observer {
      */
     public String[] turnQuadrantCmd() {
         
-        System.out.print("Marble placement by " + 
+        System.out.print("Quadrant rotation by " + 
                 pentago.getCurrentPlayer().getName() +"\treponse pattern: \"quadrantNumber[1-4] clockWise[0-1]\" >> ");
         
         Pattern pattern = Pattern.compile("[1-4] [0-1]");
@@ -78,7 +78,7 @@ public class View implements Observer {
         
         while (!pattern.matcher(userInput).matches()) {
             System.out.println("Sorry, you have to enter this pattern: \"quadrantNumber[1-4] clockWise[0-1]\". Try again");
-            System.out.print("Marble placement by " + 
+            System.out.print("Quadrant rotation by " + 
                 pentago.getCurrentPlayer().getName() +" >> ");
             userInput = in.nextLine();
         }

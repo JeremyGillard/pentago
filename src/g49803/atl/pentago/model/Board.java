@@ -10,10 +10,12 @@ public class Board {
     private final Marble[][] board;
 
     /**
-     * Allows to create a 6x6 board.
+     * Allows to create a board with a side length precised.
+     * 
+     * @param side the side length precised.
      */
-    public Board() {
-        board = new Marble[6][6];
+    public Board(int side) {
+        board = new Marble[side][side];
     }
 
     /**

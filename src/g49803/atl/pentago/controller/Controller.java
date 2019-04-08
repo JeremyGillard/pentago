@@ -42,6 +42,13 @@ public class Controller {
         pentago.start();
         pentago.addObserver(view);
 
+        userInputCmd();
+
+        view.displayWinner();
+
+    }
+    
+    private void userInputCmd() {
         while (!pentago.isOver()) {
 
             try {
@@ -54,12 +61,12 @@ public class Controller {
                         Boolean.parseBoolean(turnQuadrantCmd[1]));
             } catch (StateGameException e) {
                 break;
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+                userInputCmd();
             }
 
         }
-
-        view.displayWinner();
-
     }
 
 }
