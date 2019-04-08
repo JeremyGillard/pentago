@@ -73,14 +73,16 @@ public class Board {
         }
         System.out.println(description);
     }
-
+    
     /**
-     * Returns the tab[][] representation of the board.
-     *
-     * @return the tab[][] representation of the board.
+     * Returns the marble at a certain position on the board.
+     * 
+     * @param x the x position of the marble.
+     * @param y the y position of the marble.
+     * @return the marble at a certain position on the board.
      */
-    public Marble[][] getArrangement() {
-        return board;
+    public Marble getMarbleAtPosition(int x, int y) {
+        return board[x][y];
     }
 
 }

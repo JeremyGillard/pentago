@@ -31,7 +31,7 @@ public class PentagoTest {
         pentago.addNewPlayer("Bart");
         pentago.start();
         pentago.placeMarble(0, 0);
-        assertEquals(pentago.getBoard().getArrangement()[0][0], Marble.WHITE);
+        assertEquals(pentago.getMarbleAt(0, 0), Marble.WHITE);
     }
     
     @Test (expected = RuntimeException.class)

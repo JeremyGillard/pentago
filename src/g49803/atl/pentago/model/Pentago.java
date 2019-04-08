@@ -15,7 +15,7 @@ public class Pentago implements Observable {
 
     private final int NB_MAX_PLAYER = 2;
     
-    private static int nbPlayer = 0;
+    private static int playerNbAssignement = 1;
 
     private final Board board;
 
@@ -44,7 +44,7 @@ public class Pentago implements Observable {
     public void addNewPlayer(String name) {
         if (players.size() < NB_MAX_PLAYER) {
             players.add(new Player(name));
-            nbPlayer++;
+            playerNbAssignement++;
         } else {
             throw new RuntimeException("There is enough player for this game");
         }
@@ -144,7 +144,7 @@ public class Pentago implements Observable {
      * @return true if a player has won.
      */
     public boolean didAnyoneWin() {
-        return board.getArrangement()[0][5] != null;
+        return board.getMarbleAtPosition(0, 5) != null;
     }
 
     /**
@@ -155,23 +155,28 @@ public class Pentago implements Observable {
     public boolean isOver() {
         return didAnyoneWin();
     }
-
+    
     /**
-     * Returns the board of the game.
+     * Returns the marble at a certain position on the board.
      * 
-     * @return the board of the game.
+     * @param x the x position of the marble.
+     * @param y the y position of the marble.
+     * @return the marble at a certain position on the board.
      */
-    public Board getBoard() {
-        return board;
+    public Marble getMarbleAt(int x, int y) {
+        return board.getMarbleAtPosition(x, y);
     }
     
     /**
-     * Returns the number of player added to the game.
+     * Represents the number that will be assigned to the future added player. 
+     * This method exists mainly to be able to address more correctly 
+     * in the view before having a name.
      * 
-     * @return the number of player added to the game.
+     * @return the number that will be assigned to the future player who will 
+     * be added to the game.
      */
     public int getNbPlayer() {
-        return nbPlayer;
+        return playerNbAssignement;
     }
 
     @Override
