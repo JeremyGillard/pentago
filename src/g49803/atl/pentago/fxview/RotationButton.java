@@ -52,7 +52,7 @@ public class RotationButton extends StackPane {
 
     private void arrangement() {
         this.getChildren().addAll(circle, label);
-        GridPane.setMargin(this, new Insets(40, 40, 40, 40));
+        GridPane.setMargin(this, new Insets(20, 20, 20, 20));
     }
     
 }

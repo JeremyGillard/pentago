@@ -103,11 +103,11 @@ public class Pentago implements Observable {
         board.fillCell(col, row, currentPlayer.getColor());
         lastXPlacement = col;
         lastYPlacement = row;
-        state = State.ROTATION;
         if (didAnyoneWin()) {
             state = State.OVER;
         }
         this.notifyObservers();
+        state = State.ROTATION;
     }
 
     /**
@@ -139,6 +139,7 @@ public class Pentago implements Observable {
         } else {
             currentPlayer = players.get(0);
         }
+        this.notifyObservers();
         state = State.PLACEMENT;
     }
     
