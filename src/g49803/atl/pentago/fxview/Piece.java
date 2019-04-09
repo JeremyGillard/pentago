@@ -5,6 +5,7 @@ import g49803.atl.pentago.model.Marble;
 import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.model.State;
 import g49803.atl.pentago.util.Observer;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
@@ -66,6 +67,14 @@ public class Piece extends Circle implements Observer {
     
     private void behavior() {
         pentago.addObserver(this);
+        
+        this.setOnMouseEntered((event) -> {
+            this.getScene().setCursor(Cursor.HAND);
+        });
+
+        this.setOnMouseExited((event) -> {
+            this.getScene().setCursor(Cursor.DEFAULT);
+        });
         
         this.setOnMouseClicked((event) -> {
             System.out.println("CurrentPlayer :" + pentago.getCurrentPlayer().getName());

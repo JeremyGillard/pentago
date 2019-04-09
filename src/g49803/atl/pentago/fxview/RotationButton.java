@@ -3,6 +3,7 @@ package g49803.atl.pentago.fxview;
 import g49803.atl.pentago.model.GameStateException;
 import g49803.atl.pentago.model.Pentago;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Lighting;
@@ -32,6 +33,14 @@ public class RotationButton extends StackPane {
     }
 
     private void behavior(int quadrantNumber, boolean clockwise) {
+        label.setOnMouseEntered((event) -> {
+            this.getScene().setCursor(Cursor.HAND);
+        });
+
+        label.setOnMouseExited((event) -> {
+            this.getScene().setCursor(Cursor.DEFAULT);
+        });
+        
         label.setOnMouseClicked((event) -> {
             circle.setFill(Color.rgb(238, 195, 157));
             try {
