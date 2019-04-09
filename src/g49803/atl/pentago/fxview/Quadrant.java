@@ -52,7 +52,7 @@ class Quadrant extends StackPane implements Observer {
         grid.setGridLinesVisible(true);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                grid.add(new Piece(i, j, quadrantNumber, this.pentago, lightingEffet), i, j);
+                grid.add(new Piece(quadrantNumber, i, j, this.pentago, lightingEffet), i, j);
             }
         }
         

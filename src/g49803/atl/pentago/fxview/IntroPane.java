@@ -87,7 +87,7 @@ public class IntroPane extends StackPane {
     private void initSecondPlayerField() {
         player2Label = new Label("Second player's name :");
         player2Label.setFont(Font.font("sans-serif", FontWeight.BOLD, 40));
-        player2Label.setTextFill(Color.rgb(138, 95, 57));
+        player2Label.setTextFill(Color.rgb(68, 25, 7));
 
         player2TF = new TextField();
         player2TF.setFont(Font.font("sans-serif", FontWeight.BOLD, 30));
@@ -97,7 +97,7 @@ public class IntroPane extends StackPane {
     private void initFirstPlayerField() {
         player1Label = new Label("First player's name :");
         player1Label.setFont(Font.font("sans-serif", FontWeight.BOLD, 40));
-        player1Label.setTextFill(Color.rgb(138, 95, 57));
+        player1Label.setTextFill(Color.rgb(68, 25, 7));
 
         player1TF = new TextField();
         player1TF.setFont(Font.font("sans-serif", FontWeight.BOLD, 30));
@@ -116,7 +116,7 @@ public class IntroPane extends StackPane {
         introRoot.setAlignment(Pos.CENTER);
         introRoot.setPadding(new Insets(40, 40, 40, 40));
         introRoot.setSpacing(40);
-        introRoot.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 50, 0.7), CornerRadii.EMPTY, Insets.EMPTY)));
+        introRoot.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 50, 0.4), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     private void arrangement() {
@@ -194,7 +194,8 @@ public class IntroPane extends StackPane {
         Scene gameScene = new Scene(gamePane,
                 Screen.getPrimary().getVisualBounds().getWidth(),
                 Screen.getPrimary().getVisualBounds().getHeight());
-        ((Stage) this.getScene().getWindow()).setScene(gameScene);
-        ((Stage) this.getScene().getWindow()).setFullScreen(true);
+        Stage stage = ((Stage) this.getScene().getWindow());
+        stage.setScene(gameScene);
+        stage.setFullScreen(true);
     }
 }
