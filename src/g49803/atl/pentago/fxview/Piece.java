@@ -1,9 +1,11 @@
 package g49803.atl.pentago.fxview;
 
+import g49803.atl.pentago.model.GameStateException;
 import g49803.atl.pentago.model.Marble;
 import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.model.State;
 import g49803.atl.pentago.util.Observer;
+import javafx.scene.Parent;
 import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -65,12 +67,22 @@ public class Piece extends Circle implements Observer {
     private void behavior() {
         pentago.addObserver(this);
         
-        this.setOnMouseClicked(e -> {
+        this.setOnMouseClicked((event) -> {
             System.out.println("CurrentPlayer :" + pentago.getCurrentPlayer().getName());
             System.out.println("Xposition :" + Xposition);
             System.out.println("Yposition :" + Yposition);
             System.out.println("quadrantNb:" + quadrantNumber);
-            pentago.placeMarble(Xposition, Yposition);
+            try {
+                pentago.placeMarble(Xposition, Yposition);
+            } catch (IllegalArgumentException | GameStateException e) {
+                //Trouver un moyen de faire remonter le message jusqu'au label du gamePane.
+//                System.out.println(e.getMessage());
+                Parent parent = this.getParent();
+                while (!(parent instanceof GamePane)) {
+                    parent = parent.getParent();
+                }
+                ((GamePane) parent).setGameCommunication(e.getMessage());
+            }
         });
     }
 

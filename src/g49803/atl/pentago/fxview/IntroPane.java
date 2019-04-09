@@ -1,11 +1,16 @@
 package g49803.atl.pentago.fxview;
 
+import g49803.atl.pentago.model.Pentago;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Lighting;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -15,12 +20,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 /**
  *
  * @author Jeremy
  */
 public class IntroPane extends StackPane {
+
+    private final Pentago pentago;
 
     private Label title;
 
@@ -42,7 +51,13 @@ public class IntroPane extends StackPane {
 
     private GridPane tfPane;
 
-    public IntroPane() {
+    private GamePane gamePane;
+
+    private final Lighting lightingEffect;
+
+    public IntroPane(Pentago pentago, Lighting lightingEffect) {
+        this.pentago = pentago;
+        this.lightingEffect = lightingEffect;
         initTitle();
         initFirstPlayerField();
         initSecondPlayerField();
@@ -50,7 +65,7 @@ public class IntroPane extends StackPane {
         initQuitButton();
         visualInitialization();
         arrangement();
-//        behavior();
+        behavior();
     }
 
     private void initQuitButton() {
@@ -118,31 +133,68 @@ public class IntroPane extends StackPane {
         this.getChildren().addAll(imageView, introRoot);
     }
 
-    // Défaut, le jeu se lance avec "Please enter a name comme noms"
-//    private void behavior() {
-//        startButton.setOnMouseReleased((event) -> {
-//            if (player1TF.getText().isEmpty()) {
-//                player1TF.setText("Please enter a name here");
-//            }
-//            if (player2TF.getText().isEmpty()) {
-//                player2TF.setText("Please enter a name here");
-//            }
-//        });
-//    }
-    
-    public Button getStartButton() {
-        return startButton;
+    private void behavior() {
+        quitButton.setOnMouseEntered((event) -> {
+            this.getScene().setCursor(Cursor.HAND);
+        });
+
+        quitButton.setOnMouseExited((event) -> {
+            this.getScene().setCursor(Cursor.DEFAULT);
+        });
+
+        quitButton.setOnMouseClicked((event) -> {
+            ((Stage) this.getScene().getWindow()).close();
+        });
+
+        startButton.setOnMouseEntered((event) -> {
+            this.getScene().setCursor(Cursor.HAND);
+        });
+
+        startButton.setOnMouseExited((event) -> {
+            this.getScene().setCursor(Cursor.DEFAULT);
+        });
+
+        startButton.setOnMouseClicked((event) -> {
+            if (player1TF.getText().isEmpty() || player2TF.getText().isEmpty()) {
+                if (player1TF.getText().isEmpty()) {
+                    player1TF.setPromptText("Please enter a name");
+                }
+                if (player2TF.getText().isEmpty()) {
+                    player2TF.setPromptText("Please enter a name");
+                }
+            } else {
+                pentago.addNewPlayer(player1TF.getText());
+                pentago.addNewPlayer(player2TF.getText());
+                pentago.start();
+                nextScene();
+            }
+        });
+
+        this.setOnKeyPressed(key -> {
+            if (key.getCode().equals(KeyCode.ENTER)) {
+                if (player1TF.getText().isEmpty() || player2TF.getText().isEmpty()) {
+                    if (player1TF.getText().isEmpty()) {
+                        player1TF.setPromptText("Please enter a name");
+                    }
+                    if (player2TF.getText().isEmpty()) {
+                        player2TF.setPromptText("Please enter a name");
+                    }
+                } else {
+                    pentago.addNewPlayer(player1TF.getText());
+                    pentago.addNewPlayer(player2TF.getText());
+                    pentago.start();
+                    nextScene();
+                }
+            }
+        });
     }
 
-    public Button getQuitButton() {
-        return quitButton;
-    }
-
-    public String getFirstPlayerName() {
-        return player1TF.getText();
-    }
-
-    public String getSecondPlayerName() {
-        return player2TF.getText();
+    private void nextScene() {
+        gamePane = new GamePane(pentago, lightingEffect);
+        Scene gameScene = new Scene(gamePane,
+                Screen.getPrimary().getVisualBounds().getWidth(),
+                Screen.getPrimary().getVisualBounds().getHeight());
+        ((Stage) this.getScene().getWindow()).setScene(gameScene);
+        ((Stage) this.getScene().getWindow()).setFullScreen(true);
     }
 }
