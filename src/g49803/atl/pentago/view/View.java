@@ -47,13 +47,13 @@ public class View implements Observer {
      */
     public String[] placeMarbleCmd() {
         System.out.print("Marble placement by " + 
-                pentago.getCurrentPlayer().getName() +"\treponse pattern: \"number[0-5] number[0-5]\" >> ");
+                pentago.getCurrentPlayer().getName() +"\treponse pattern: \"Xnumber[0-5] Ynumber[0-5]\" >> ");
         
         Pattern pattern = Pattern.compile("[0-5] [0-5]");
         String userInput = in.nextLine();
         
         while (!pattern.matcher(userInput).matches()) {
-            System.out.println("Sorry, you have to enter this pattern: \"number number\". Try again");
+            System.out.println("Sorry, you have to enter this pattern: \"Xnumber Ynumber\". Try again");
             System.out.print("Marble placement by " + 
                 pentago.getCurrentPlayer().getName() +" >> ");
             userInput = in.nextLine();

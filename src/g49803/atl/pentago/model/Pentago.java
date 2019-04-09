@@ -28,6 +28,14 @@ public class Pentago implements Observable {
     private State state;
 
     private final List<Observer> observerList;
+    
+    private int lastXPlacement;
+    
+    private int lastYPlacement;
+    
+    private int lastQuadrantRotated;
+    
+    private boolean isLastRotationClockwise;
 
     /**
      * Allows to create a pentago game.
@@ -93,6 +101,8 @@ public class Pentago implements Observable {
                     + "are outside the area covered by the board");
         }
         board.fillCell(col, row, currentPlayer.getColor());
+        lastXPlacement = col;
+        lastYPlacement = row;
         state = State.ROTATION;
         if (didAnyoneWin()) {
             state = State.OVER;
@@ -114,6 +124,8 @@ public class Pentago implements Observable {
             throw new IllegalArgumentException("The number of quadrant does not exist, it will be between 1 and 4");
         }
         board.turnQuadrant(quadrantNumber, clockwiseDirection);
+        lastQuadrantRotated = quadrantNumber;
+        isLastRotationClockwise = clockwiseDirection;
         if (didAnyoneWin()) {
             state = State.OVER;
         }
@@ -185,6 +197,51 @@ public class Pentago implements Observable {
      */
     public int getNbPlayer() {
         return playerNbAssignement;
+    }
+    
+    /**
+     * Returns the x position of the last marble placement.
+     * 
+     * @return the x position of the last marble placement.
+     */
+    public int getLastXPlacement() {
+        return lastXPlacement;
+    }
+    
+    /**
+     * Returns the y position of the last marble placement.
+     * 
+     * @return the y position of the last marble placement.
+     */
+    public int getLastYPlacement() {
+        return lastYPlacement;
+    }
+    
+    /**
+     * Returns the current state of the game.
+     * 
+     * @return the current state of the game.
+     */
+    public State getCurrentGameState() {
+        return state;
+    }
+    
+    /**
+     * Returns the number of the last quadrant rotated.
+     * 
+     * @return the number of the last quadrant rotated.
+     */
+    public int getLastQuadrantRotated() {
+        return lastQuadrantRotated;
+    }
+    
+    /**
+     * Returns true if the last rotation was clockwise.
+     * 
+     * @return true if the last rotation was clockwise.
+     */
+    public boolean isLastRotationClockwise() {
+        return isLastRotationClockwise;
     }
 
     @Override

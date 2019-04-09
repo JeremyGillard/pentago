@@ -1,59 +1,68 @@
 package g49803.atl.pentago.fxview;
 
+import g49803.atl.pentago.model.Pentago;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 
 class Board extends GridPane {
+    
+    private final Pentago pentago;
 
     private Quadrant quadrantI;
     private Quadrant quadrantII;
     private Quadrant quadrantIII;
     private Quadrant quadrantIV;
 
-    private Button quadILeft;
-    private Button quadIRight;
+    private RotationButton quadILeft;
+    private RotationButton quadIRight;
 
-    private Button quadIILeft;
-    private Button quadIIRight;
+    private RotationButton quadIILeft;
+    private RotationButton quadIIRight;
 
-    private Button quadIIILeft;
-    private Button quadIIIRight;
+    private RotationButton quadIIILeft;
+    private RotationButton quadIIIRight;
 
-    private Button quadIVLeft;
-    private Button quadIVRight;
+    private RotationButton quadIVLeft;
+    private RotationButton quadIVRight;
+    
+    private final Lighting lightEffect;
 
-    Board() {
+    Board(Pentago pentago, Lighting lightEffect) {
+        this.pentago = pentago;
+        this.lightEffect = lightEffect;
         initContent();
         initBoard();
     }
 
     private void initContent() {
-        quadrantI = new Quadrant();
-        quadrantII = new Quadrant();
-        quadrantIII = new Quadrant();
-        quadrantIV = new Quadrant();
+        quadrantI = new Quadrant(1, pentago, lightEffect);
+        quadrantII = new Quadrant(2, pentago, lightEffect);
+        quadrantIII = new Quadrant(3, pentago, lightEffect);
+        quadrantIV = new Quadrant(4, pentago, lightEffect);
 
-        quadILeft = new Button("⟲");
+        quadILeft = new RotationButton(1, false, pentago, lightEffect);
         quadILeft.setShape(new Circle(20));
-        quadIRight = new Button("⟳");
+        quadIRight = new RotationButton(1, true, pentago, lightEffect);
         quadIRight.setShape(new Circle(20));
 
-        quadIILeft = new Button("⟲");
+        quadIILeft = new RotationButton(2, false, pentago, lightEffect);
         quadIILeft.setShape(new Circle(20));
-        quadIIRight = new Button("⟳");
+        quadIIRight = new RotationButton(2, true, pentago, lightEffect);
         quadIIRight.setShape(new Circle(20));
 
-        quadIIILeft = new Button("⟲");
+        quadIIILeft = new RotationButton(3, false, pentago, lightEffect);
         quadIIILeft.setShape(new Circle(20));
-        quadIIIRight = new Button("⟳");
+        quadIIIRight = new RotationButton(3, true, pentago, lightEffect);
         quadIIIRight.setShape(new Circle(20));
 
-        quadIVLeft = new Button("⟲");
+        quadIVLeft = new RotationButton(4, false, pentago, lightEffect);
         quadIVLeft.setShape(new Circle(20));
-        quadIVRight = new Button("⟳");
+        quadIVRight = new RotationButton(4, true, pentago, lightEffect);
         quadIVRight.setShape(new Circle(20));
     }
 

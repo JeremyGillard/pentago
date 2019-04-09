@@ -1,69 +1,83 @@
 package g49803.atl.pentago.fxview;
 
-import java.util.ArrayList;
-import java.util.List;
+import g49803.atl.pentago.model.Pentago;
+import g49803.atl.pentago.model.State;
+import g49803.atl.pentago.util.Observer;
+import javafx.animation.RotateTransition;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
+import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
-class Quadrant extends Group {
+class Quadrant extends StackPane implements Observer {
     
-    private StackPane core;
+    private final Pentago pentago;
+
+    private final int quadrantNumber;
     
-    private Rectangle shape;
-    
-    private GridPane content;
-    
-    Quadrant() {
-        initShape();
-        initContent();
-        initCore();
-        fixContent();
-        
+    private Rectangle representation;
+
+    private RotateTransition transition;
+
+    public Quadrant(int quadrantNumber, Pentago pentago, Lighting lightingEffet) {
+        this.quadrantNumber = quadrantNumber;
+        this.pentago = pentago;
+        visualInitialization(lightingEffet);
+        arrangement(quadrantNumber, lightingEffet);
+        behavior();
     }
 
-    private void initCore() {
-        core = new StackPane();
-        core.setPrefWidth(300);
-        core.setPrefHeight(300);
-        core.getChildren().addAll(shape, content);
+    private void visualInitialization(Lighting lightingEffet) {
+        representation = new Rectangle(300, 300);
+        representation.setFill(new LinearGradient(0f, 0f, 0f, 1f, true,
+                CycleMethod.NO_CYCLE,
+                new Stop[]{new Stop(0, Color.rgb(89, 34, 2)),
+                    new Stop(1, Color.rgb(65, 28, 1))}));
+        representation.setArcWidth(100);
+        representation.setArcHeight(100);
+        representation.setEffect(lightingEffet);
     }
 
-    private void initContent() {
-        content = new GridPane();
-        content.setGridLinesVisible(false);
-        List<Circle> list = new ArrayList();
-        for (int i = 0; i < 9; i++) {
-            list.add(new Circle(35));
-            list.get(i).setFill(Color.GAINSBORO);
-        }
-        int o = 0;
+    private void arrangement(int quadrantNumber, Lighting lightingEffet) {
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(25);
+        grid.setVgap(25);
+        grid.setGridLinesVisible(true);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                content.add(list.get(o), i, j);
-                o++;
+                grid.add(new Piece(i, j, quadrantNumber, this.pentago, lightingEffet), i, j);
             }
         }
-        content.setAlignment(Pos.CENTER);
-        content.setHgap(25);
-        content.setVgap(25);
+        
+        this.getChildren().addAll(representation, grid);
     }
 
-    private void initShape() {
-        shape = new Rectangle();
-        shape.setWidth(300);
-        shape.setHeight(300);
-        shape.setFill(Color.ANTIQUEWHITE);
-        shape.setArcHeight(70);
-        shape.setArcWidth(70);
+    private void behavior() {
+        pentago.addObserver(this);
+        
+        transition = new RotateTransition(Duration.millis(3000), this);
+        transition.setDuration(Duration.millis(800));
     }
-    
-    private void fixContent() {
-        this.getChildren().add(core);
+
+    @Override
+    public void update() {
+        if (pentago.getCurrentGameState() == State.ROTATION) {
+            if (pentago.getLastQuadrantRotated() == quadrantNumber) {
+                if (pentago.isLastRotationClockwise()) {
+                    transition.setByAngle(90);
+                } else {
+                    transition.setByAngle(-90);
+                }
+                transition.play();
+            }
+        }
     }
 
 }
