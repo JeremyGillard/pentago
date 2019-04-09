@@ -75,8 +75,6 @@ public class Piece extends Circle implements Observer {
             try {
                 pentago.placeMarble(Xposition, Yposition);
             } catch (IllegalArgumentException | GameStateException e) {
-                //Trouver un moyen de faire remonter le message jusqu'au label du gamePane.
-//                System.out.println(e.getMessage());
                 Parent parent = this.getParent();
                 while (!(parent instanceof GamePane)) {
                     parent = parent.getParent();

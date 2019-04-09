@@ -1,7 +1,9 @@
 package g49803.atl.pentago.fxview;
 
+import g49803.atl.pentago.model.GameStateException;
 import g49803.atl.pentago.model.Pentago;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
@@ -30,9 +32,17 @@ public class RotationButton extends StackPane {
     }
 
     private void behavior(int quadrantNumber, boolean clockwise) {
-        label.setOnMouseClicked((e) -> {
-            circle.setFill(Color.rgb(238, 195, 157)); // A voir si l'effet reste ou pas
-            this.pentago.rotateQuadrant(quadrantNumber, clockwise);
+        label.setOnMouseClicked((event) -> {
+            circle.setFill(Color.rgb(238, 195, 157));
+            try {
+                this.pentago.rotateQuadrant(quadrantNumber, clockwise);
+            } catch (IllegalArgumentException | GameStateException e) {
+                Parent parent = this.getParent();
+                while (!(parent instanceof GamePane)) {
+                    parent = parent.getParent();
+                }
+                ((GamePane) parent).setGameCommunication(e.getMessage());
+            }
         });
     }
 

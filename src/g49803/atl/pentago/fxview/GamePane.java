@@ -44,6 +44,8 @@ public class GamePane extends VBox implements Observer {
     
     private Button quitButton;
     
+    private boolean gameCommunicationYet;
+    
     public GamePane(Pentago pentago, Lighting lightingEffect) {
         this.pentago = pentago;
         this.setSpacing(15);
@@ -68,20 +70,33 @@ public class GamePane extends VBox implements Observer {
         quitButton.setMinSize(70, 25);
         quitButton.setBackground(new Background(new BackgroundFill(Color.rgb(68, 25, 7), new CornerRadii(10), Insets.EMPTY)));
         quitButton.setFont(Font.font("sans-serif", FontWeight.BOLD, 25));
-        quitButton.setTextFill(Color.rgb(138, 95, 57));
+        quitButton.setTextFill(Color.rgb(176, 148, 101));
     }
 
     private void initGameCommunicationLabel() {
         gameCommunicationLabel = new Label("Message : ");
+        gameCommunicationLabel.setBackground(new Background(new BackgroundFill(Color.rgb(68, 25, 7), new CornerRadii(10), new Insets(-5, -10, -5, -10))));
         gameCommunicationLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 30));
-        gameCommunicationLabel.setTextFill(Color.rgb(68, 25, 7));
+        gameCommunicationLabel.setTextFill(Color.rgb(176, 148, 101));
+        gameCommunicationYet = false;
+    }
+    
+    private void changeGameCommunicationLabelColor() {
+        if (gameCommunicationYet) {
+            gameCommunicationLabel.setTextFill(Color.rgb(138, 95, 57));
+            gameCommunicationYet = false;
+        } else {
+            gameCommunicationLabel.setTextFill(Color.rgb(176, 148, 101));
+            gameCommunicationYet = true;
+        }
     }
 
     private void initCurrentPlayerLabel() {
         String firstName = pentago.getCurrentPlayer().getName();
         currentPlayerLabel = new Label("Current Player : " + firstName);
+        currentPlayerLabel.setBackground(new Background(new BackgroundFill(Color.rgb(68, 25, 7), new CornerRadii(10), new Insets(-5, -10, -5, -10))));
         currentPlayerLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 30));
-        currentPlayerLabel.setTextFill(Color.rgb(68, 25, 7));
+        currentPlayerLabel.setTextFill(Color.rgb(176, 148, 101));
     }
 
     private void arrangement() {
@@ -106,13 +121,14 @@ public class GamePane extends VBox implements Observer {
     
     void setGameCommunication(String communication) {
         gameCommunicationLabel.setText("Message : " + communication);
+        changeGameCommunicationLabelColor();
     }
 
     @Override
     public void update() {
         currentPlayerLabel.setText("Current Player : " + pentago.getCurrentPlayer().getName());
         currentPlayerLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 30));
-        currentPlayerLabel.setTextFill(Color.rgb(68, 25, 7));
+        currentPlayerLabel.setTextFill(Color.rgb(176, 148, 101));
     }
     
 }
