@@ -20,7 +20,7 @@ import javafx.util.Duration;
  *
  * @author Jeremy Gillard
  */
-class Quadrant extends StackPane implements Observer {
+public class Quadrant extends StackPane implements Observer {
 
     private final Pentago pentago;
 

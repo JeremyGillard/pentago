@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -19,7 +20,7 @@ import javafx.scene.text.Font;
  * 
  * @author Jeremy
  */
-class RotationButton extends StackPane {
+public class RotationButton extends StackPane {
     
     private final Pentago pentago;
     
@@ -54,6 +55,7 @@ class RotationButton extends StackPane {
         });
         
         label.setOnMouseClicked((event) -> {
+            slideClickSound();
             circle.setFill(Color.rgb(238, 195, 157));
             try {
                 this.pentago.rotateQuadrant(quadrantNumber, clockwise);
@@ -86,4 +88,9 @@ class RotationButton extends StackPane {
         GridPane.setMargin(this, new Insets(20, 20, 20, 20));
     }
     
+    private void slideClickSound() {
+        AudioClip sound = new AudioClip("file:media/sound/slideBoard.wav");
+        sound.setVolume(0.5);
+        sound.play();
+    }
 }

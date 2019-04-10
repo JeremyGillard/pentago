@@ -13,7 +13,7 @@ import javafx.scene.shape.Circle;
  * 
  * @author Jeremy Gillard
  */
-class Board extends GridPane {
+public class Board extends GridPane {
     
     private final Pentago pentago;
 

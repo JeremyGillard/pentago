@@ -17,6 +17,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -29,7 +30,7 @@ import javafx.stage.Stage;
  * 
  * @author Jeremy
  */
-class IntroPane extends StackPane {
+public class IntroPane extends StackPane {
 
     private final Pentago pentago;
 
@@ -119,7 +120,7 @@ class IntroPane extends StackPane {
     }
 
     private void visualInitialization() {
-        imageView = new ImageView("file:img/wood.jpg");
+        imageView = new ImageView("file:media/img/wood.jpg");
         introRoot = new VBox();
         introRoot.setAlignment(Pos.CENTER);
         introRoot.setPadding(new Insets(40, 40, 40, 40));
@@ -151,6 +152,7 @@ class IntroPane extends StackPane {
         });
 
         quitButton.setOnMouseClicked((event) -> {
+            onClickSound();
             ((Stage) this.getScene().getWindow()).close();
         });
 
@@ -163,6 +165,7 @@ class IntroPane extends StackPane {
         });
 
         startButton.setOnMouseClicked((event) -> {
+            onClickSound();
             if (player1TF.getText().isEmpty() || player2TF.getText().isEmpty()) {
                 if (player1TF.getText().isEmpty()) {
                     player1TF.setPromptText("Please enter a name");
@@ -195,6 +198,12 @@ class IntroPane extends StackPane {
                 }
             }
         });
+    }
+
+    private void onClickSound() {
+        AudioClip sound = new AudioClip("file:media/sound/clickButton.wav");
+        sound.setVolume(0.2);
+        sound.play();
     }
 
     private void nextScene() {
