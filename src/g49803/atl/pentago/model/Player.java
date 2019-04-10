@@ -25,7 +25,7 @@ public class Player {
      *
      * @param color the player's color.
      */
-    public void setColor(Marble color) {
+    void setColor(Marble color) {
         this.color = color;
     }
 

@@ -15,10 +15,12 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 
 /**
- *
- * @author Jeremy
+ * This class allows to create empty circle on the quadrants of the pentago game,
+ * and the player's white and black marbles during the game.
+ * 
+ * @author Jeremy Gillard
  */
-public class Piece extends Circle implements Observer {
+class Piece extends Circle implements Observer {
     
     private static final int RADIUS = 35;
     
@@ -32,6 +34,17 @@ public class Piece extends Circle implements Observer {
     
     private final Lighting lighting;
     
+    /**
+     * Every Piece will be instantiated with a certain X and Y position 
+     * in relation to the board pentago game, a number of quadrant, a pentago 
+     * game model and a light effect.
+     * 
+     * @param quadrantNumber the quadrant number in which the piece is located.
+     * @param Xposition the x position of the piece in relation to the board pentago game.
+     * @param Yposition the y position of the piece in relation to the board pentago game.
+     * @param pentago the pentago model
+     * @param lightingVisualEffect the visual effect.
+     */
     public Piece(int quadrantNumber, int Xposition, int Yposition, Pentago pentago, Lighting lightingVisualEffect) {
         super(RADIUS);
         this.pentago = pentago;

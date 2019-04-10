@@ -24,10 +24,12 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- *
+ * This class is the representation of the introduction scene. It is there the 
+ * players's names will be asked for and the game will then be launched.
+ * 
  * @author Jeremy
  */
-public class IntroPane extends StackPane {
+class IntroPane extends StackPane {
 
     private final Pentago pentago;
 
@@ -55,6 +57,12 @@ public class IntroPane extends StackPane {
 
     private final Lighting lightingEffect;
 
+    /**
+     * Allows to create a introPane with a pentago model and a light effect.
+     * 
+     * @param pentago the pentago game model.
+     * @param lightingEffect the visual effect.
+     */
     public IntroPane(Pentago pentago, Lighting lightingEffect) {
         this.pentago = pentago;
         this.lightingEffect = lightingEffect;

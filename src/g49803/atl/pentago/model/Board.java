@@ -85,7 +85,7 @@ public class Board {
      * @param y the y position of the marble.
      * @return the marble at a certain position on the board.
      */
-    public Marble getMarbleAtPosition(int x, int y) {
+    Marble getMarbleAtPosition(int x, int y) {
         return board[x][y];
     }
     
@@ -94,7 +94,7 @@ public class Board {
      * 
      * @return the length side of the board.
      */
-    public int getSideBoard() {
+    int getSideBoard() {
         return SIDE;
     }
 

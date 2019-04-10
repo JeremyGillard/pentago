@@ -29,10 +29,11 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Jeremy
+ * This class is the main graphical representation of the pentago game.
+ * 
+ * @author Jeremy Gillard
  */
-public class GamePane extends VBox implements Observer {
+class GamePane extends VBox implements Observer {
     
     private final Pentago pentago;
     
@@ -46,6 +47,12 @@ public class GamePane extends VBox implements Observer {
     
     private boolean gameCommunicationYet;
     
+    /**
+     * Allows to create a gamePane with a pentago model and a light effect.
+     * 
+     * @param pentago the pentago game model.
+     * @param lightingEffect the visual effect.
+     */
     public GamePane(Pentago pentago, Lighting lightingEffect) {
         this.pentago = pentago;
         this.setSpacing(15);

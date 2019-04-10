@@ -1,7 +1,7 @@
 package g49803.atl.pentago.model;
 
 /**
- * this class represents the states in which the pentago game can be found.
+ * This class represents the states in which the pentago game can be found.
  * 
  * @author Jeremy Gillard
  */
@@ -17,6 +17,11 @@ public enum State {
         communicationSate = communication;
     }
     
+    /**
+     * Returns a string representation of a state enum.
+     * 
+     * @return a string representation of a state enum.
+     */
     @Override
     public String toString() {
         return communicationSate;

@@ -14,10 +14,12 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 /**
- *
+ * This class allows to create a rotation button with a certain graphic charter 
+ * to turn the pentago quadrants.
+ * 
  * @author Jeremy
  */
-public class RotationButton extends StackPane {
+class RotationButton extends StackPane {
     
     private final Pentago pentago;
     
@@ -25,6 +27,16 @@ public class RotationButton extends StackPane {
     
     private Label label;
     
+    /**
+     * Allows to create a rotation button linked with a pentago game, a quandrant 
+     * and assign with a rotation sense. The lightingEffect is only here for an
+     * esthetic reason.
+     * 
+     * @param quadrantNumber the number of the quadrant to which it is linked.
+     * @param clockwise the sense. Clockwise or not.
+     * @param pentago the pentago game to which it is linked.
+     * @param lightingEffect the esthetic effect.
+     */
     public RotationButton(int quadrantNumber, boolean clockwise, Pentago pentago, Lighting lightingEffect) {
         this.pentago = pentago;
         visualInitialization(lightingEffect, clockwise);

@@ -11,10 +11,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- *
+ * This class is the instance of the graphical pentago game representation. 
+ * 
  * @author Jeremy Gillard
  */
-public class View extends Application {
+class View extends Application {
     
     private Pentago pentago;
     
@@ -25,16 +26,15 @@ public class View extends Application {
      * The start method is called after the init method has returned, and after 
      * the system is ready for the application to begin running. 
      * 
+     * Here, the introScene will be instantiated to take player's names and then
+     * instantiated the gameScene with a pentago game started.
+     * 
      * @param primaryStage 
      */
     @Override
     public void start(Stage primaryStage) {
         visualBounds = Screen.getPrimary().getVisualBounds();
         pentago = new Pentago();
-        
-//        pentago.addNewPlayer("Jeremy");
-//        pentago.addNewPlayer("Thomas");
-//        pentago.start();
         
         IntroPane introPane = new IntroPane(pentago, lightingEffect());
         Scene introScene = new Scene(introPane, visualBounds.getWidth(), visualBounds.getHeight());

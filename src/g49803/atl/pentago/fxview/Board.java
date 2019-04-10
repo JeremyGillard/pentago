@@ -3,12 +3,16 @@ package g49803.atl.pentago.fxview;
 import g49803.atl.pentago.model.Pentago;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 
+/**
+ * This class represents the board of the pentago game; with 4 quadrant and its 
+ * rotation buttons.
+ * 
+ * @author Jeremy Gillard
+ */
 class Board extends GridPane {
     
     private final Pentago pentago;
@@ -32,6 +36,12 @@ class Board extends GridPane {
     
     private final Lighting lightEffect;
 
+    /**
+     * Allows to create a board with a pentago model and a light effect.
+     * 
+     * @param pentago the pentago game model.
+     * @param lightingEffect the visual effect.
+     */
     Board(Pentago pentago, Lighting lightEffect) {
         this.pentago = pentago;
         this.lightEffect = lightEffect;

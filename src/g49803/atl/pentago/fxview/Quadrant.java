@@ -15,16 +15,29 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+/**
+ * This class represent a quadrant of the pentago game.
+ *
+ * @author Jeremy Gillard
+ */
 class Quadrant extends StackPane implements Observer {
-    
+
     private final Pentago pentago;
 
     private final int quadrantNumber;
-    
+
     private Rectangle representation;
 
     private RotateTransition transition;
 
+    /**
+     * The quadrant will be instantiated with a certain number, a pentago game
+     * to link with and a lightingeffect for a more friendly display.
+     * 
+     * @param quadrantNumber the number attribuated.
+     * @param pentago the pentago game.
+     * @param lightingEffet the visual effect to apply.
+     */
     public Quadrant(int quadrantNumber, Pentago pentago, Lighting lightingEffet) {
         this.quadrantNumber = quadrantNumber;
         this.pentago = pentago;
@@ -55,13 +68,13 @@ class Quadrant extends StackPane implements Observer {
                 grid.add(new Piece(quadrantNumber, i, j, this.pentago, lightingEffet), i, j);
             }
         }
-        
+
         this.getChildren().addAll(representation, grid);
     }
 
     private void behavior() {
         pentago.addObserver(this);
-        
+
         transition = new RotateTransition(Duration.millis(3000), this);
         transition.setDuration(Duration.millis(800));
     }
