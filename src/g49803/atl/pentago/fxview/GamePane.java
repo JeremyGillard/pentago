@@ -108,7 +108,7 @@ public class GamePane extends VBox implements Observer {
         currentPlayerLabel = new Label("Current Player : " + firstName);
         currentPlayerLabel.setBackground(new Background(new BackgroundFill(Color.rgb(68, 25, 7), new CornerRadii(10), new Insets(-5, -10, -5, -10))));
         currentPlayerLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 30));
-        currentPlayerLabel.setTextFill(Color.rgb(255, 230, 158));
+        currentPlayerLabel.setTextFill(Color.rgb(189, 172, 124));
     }
 
     private void arrangement() {
@@ -143,7 +143,7 @@ public class GamePane extends VBox implements Observer {
             currentPlayerLabel.setText("Current Player : " + pentago.getCurrentPlayer().getName());
             currentPlayerLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 30));
             if (pentago.getCurrentPlayer().getColor() == Marble.WHITE) {
-                currentPlayerLabel.setTextFill(Color.rgb(185, 160, 88));
+                currentPlayerLabel.setTextFill(Color.rgb(189, 172, 124));
             } else {
                 currentPlayerLabel.setTextFill(Color.rgb(0, 0, 0));
             }
