@@ -165,7 +165,7 @@ public class Pentago implements Observable {
      * @return true if a player has won.
      */
     public boolean didAnyoneWin() {
-        return board.getMarbleAtPosition(0, 5) != null;
+        return board.checkAlignmentWinner();
     }
 
     /**
@@ -174,7 +174,7 @@ public class Pentago implements Observable {
      * @return true if the game is over.
      */
     public boolean isOver() {
-        return didAnyoneWin();
+        return didAnyoneWin() || board.isFull();
     }
     
     /**

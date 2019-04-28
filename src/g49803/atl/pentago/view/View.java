@@ -106,7 +106,7 @@ public class View implements Observer {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 if (pentago.getMarbleAt(i, j) == null) {
-                    description += " ";
+                    description += ".";
                 } else if (pentago.getMarbleAt(i, j) == Marble.BLACK) {
                     description += "#";
                 } else {
