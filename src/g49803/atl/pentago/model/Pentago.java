@@ -255,8 +255,7 @@ public class Pentago implements Observable {
         observerList.remove(obs);
     }
 
-    @Override
-    public void notifyObservers() {
+    private void notifyObservers() {
         observerList.forEach((observer) -> {
             observer.update();
         });

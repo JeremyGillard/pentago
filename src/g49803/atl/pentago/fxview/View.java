@@ -36,7 +36,7 @@ public class View extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-        initSurroundingMusic();
+        //initSurroundingMusic();
 
         visualBounds = Screen.getPrimary().getVisualBounds();
         pentago = new Pentago();

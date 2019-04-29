@@ -26,11 +26,5 @@ public interface Observable {
      */
     void removeObserver(Observer obs);
     
-    /**
-     * If this object has changed, as indicated by the hasChanged method, 
-     * then notify all of its observers and then call the clearChanged method 
-     * to indicate that this object has no longer changed.
-     */
-    void notifyObservers();
 }
 
