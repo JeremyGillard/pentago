@@ -8,6 +8,7 @@ import g49803.atl.pentago.util.Observer;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.effect.Lighting;
+import javafx.scene.layout.GridPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -93,12 +94,9 @@ public class Piece extends Circle implements Observer {
         });
 
         this.setOnMouseClicked((event) -> {
-            System.out.println("CurrentPlayer :" + pentago.getCurrentPlayer().getName());
-            System.out.println("Xposition :" + Xposition);
-            System.out.println("Yposition :" + Yposition);
-            System.out.println("quadrantNb:" + quadrantNumber);
+            System.out.println("ClickLoc (" + xPositionAccordingQuadrant(GridPane.getColumnIndex(this)) + ", " + yPositionAccordingQuadrant(GridPane.getRowIndex(this)) + ")");
             try {
-                pentago.placeMarble(Xposition, Yposition);
+                pentago.placeMarble(yPositionAccordingQuadrant(GridPane.getRowIndex(this)), xPositionAccordingQuadrant(GridPane.getColumnIndex(this)));
                 placeMarbleSound();
             } catch (IllegalArgumentException | GameStateException e) {
                 Parent parent = this.getParent();

@@ -4,6 +4,8 @@ import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.model.State;
 import g49803.atl.pentago.util.Observer;
 import javafx.animation.RotateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
@@ -13,6 +15,7 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 /**
@@ -30,10 +33,14 @@ public class Quadrant extends StackPane implements Observer {
 
     private RotateTransition transition;
 
+    int inertiaGridPane = 90;
+
+    GridPane piecePlacement;
+
     /**
      * The quadrant will be instantiated with a certain number, a pentago game
      * to link with and a lightingeffect for a more friendly display.
-     * 
+     *
      * @param quadrantNumber the number attribuated.
      * @param pentago the pentago game.
      * @param lightingEffet the visual effect to apply.
@@ -41,6 +48,7 @@ public class Quadrant extends StackPane implements Observer {
     public Quadrant(int quadrantNumber, Pentago pentago, Lighting lightingEffet) {
         this.quadrantNumber = quadrantNumber;
         this.pentago = pentago;
+        this.piecePlacement = new GridPane();
         visualInitialization(lightingEffet);
         arrangement(quadrantNumber, lightingEffet);
         behavior();
@@ -58,18 +66,17 @@ public class Quadrant extends StackPane implements Observer {
     }
 
     private void arrangement(int quadrantNumber, Lighting lightingEffet) {
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(25);
-        grid.setVgap(25);
-        grid.setGridLinesVisible(true);
+        piecePlacement.setAlignment(Pos.CENTER);
+        piecePlacement.setHgap(25);
+        piecePlacement.setVgap(25);
+        piecePlacement.setGridLinesVisible(true);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                grid.add(new Piece(quadrantNumber, i, j, this.pentago, lightingEffet), i, j);
+                piecePlacement.add(new Piece(quadrantNumber, i, j, this.pentago, lightingEffet), i, j);
             }
         }
 
-        this.getChildren().addAll(representation, grid);
+        this.getChildren().addAll(representation, piecePlacement);
     }
 
     private void behavior() {
@@ -85,8 +92,24 @@ public class Quadrant extends StackPane implements Observer {
             if (pentago.getLastQuadrantRotated() == quadrantNumber) {
                 if (pentago.isLastRotationClockwise()) {
                     transition.setByAngle(90);
+                    transition.setOnFinished(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent e) {
+                            piecePlacement.setRotate(-inertiaGridPane);
+                            System.out.println("J'ai tourné de " + (-inertiaGridPane));
+                            inertiaGridPane += 90;
+                        }
+                    });
                 } else {
                     transition.setByAngle(-90);
+                    transition.setOnFinished(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent e) {
+                            piecePlacement.setRotate(inertiaGridPane);
+                            System.out.println("J'ai tourné de " + (inertiaGridPane));
+                            inertiaGridPane += 90;
+                        }
+                    });
                 }
                 transition.play();
             }

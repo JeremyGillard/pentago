@@ -51,6 +51,8 @@ public class GamePane extends VBox implements Observer {
     private Button quitButton;
 
     private boolean gameCommunicationYet;
+    
+    private g49803.atl.pentago.view.View viewC;
 
     /**
      * Allows to create a gamePane with a pentago model and a light effect.
@@ -60,6 +62,7 @@ public class GamePane extends VBox implements Observer {
      */
     public GamePane(Pentago pentago, Lighting lightingEffect) {
         this.pentago = pentago;
+        viewC = new g49803.atl.pentago.view.View(pentago);
         this.setSpacing(15);
         this.setAlignment(Pos.CENTER);
         this.board = new Board(pentago, lightingEffect);
@@ -140,6 +143,7 @@ public class GamePane extends VBox implements Observer {
     @Override
     public void update() {
         if (pentago.getCurrentGameState() != State.OVER) {
+            viewC.update(); // ICI
             currentPlayerLabel.setText("Current Player : " + pentago.getCurrentPlayer().getName());
             currentPlayerLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 30));
             if (pentago.getCurrentPlayer().getColor() == Marble.WHITE) {
