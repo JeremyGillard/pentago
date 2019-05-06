@@ -2,13 +2,11 @@ package g49803.atl.pentago.fxview;
 
 import g49803.atl.pentago.model.Pentago;
 import javafx.application.Application;
-import javafx.concurrent.Task;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.media.AudioClip;
-import static javafx.scene.media.MediaPlayer.INDEFINITE;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;

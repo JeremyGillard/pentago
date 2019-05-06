@@ -33,8 +33,6 @@ public class Quadrant extends StackPane implements Observer {
 
     private RotateTransition transition;
 
-    int inertiaGridPane = 90;
-
     GridPane piecePlacement;
 
     /**
@@ -92,23 +90,13 @@ public class Quadrant extends StackPane implements Observer {
             if (pentago.getLastQuadrantRotated() == quadrantNumber) {
                 if (pentago.isLastRotationClockwise()) {
                     transition.setByAngle(90);
-                    transition.setOnFinished(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent e) {
-                            piecePlacement.setRotate(-inertiaGridPane);
-                            System.out.println("J'ai tourné de " + (-inertiaGridPane));
-                            inertiaGridPane += 90;
-                        }
+                    transition.setOnFinished((ActionEvent e) -> {
+                        piecePlacement.setRotate(piecePlacement.getRotate()-90);
                     });
                 } else {
                     transition.setByAngle(-90);
-                    transition.setOnFinished(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent e) {
-                            piecePlacement.setRotate(inertiaGridPane);
-                            System.out.println("J'ai tourné de " + (inertiaGridPane));
-                            inertiaGridPane += 90;
-                        }
+                    transition.setOnFinished((ActionEvent e) -> {
+                        piecePlacement.setRotate(piecePlacement.getRotate()+90);
                     });
                 }
                 transition.play();
