@@ -8,6 +8,8 @@ package g49803.atl.pentago.model;
 public class Board {
 
     private final Marble[][] board;
+    
+    private final Quadrant[] boardQ;
 
     /**
      * Allows to create a board with a side length precised.
@@ -16,6 +18,7 @@ public class Board {
      */
     public Board(int side) {
         board = new Marble[side][side];
+        boardQ = new Quadrant[4];
     }
 
     /**
@@ -56,102 +59,6 @@ public class Board {
         quadrantToBoard(quadrantPosition, quadrant);
     }
 
-    private void swapRows(Marble[][] matrix) {
-        for (int i = 0, j = matrix.length - 1; i < j; i++, j--) {
-            Marble[] x = matrix[i];
-            matrix[i] = matrix[j];
-            matrix[j] = x;
-        }
-    }
-
-    private void transpose(Marble[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = i; j < matrix[0].length; j++) {
-                Marble x = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = x;
-            }
-        }
-    }
-
-    private void rotate(Marble[][] matrix, boolean clockwise) {
-        if (clockwise) {
-            swapRows(matrix);
-            transpose(matrix);
-        } else {
-            transpose(matrix);
-            swapRows(matrix);
-        }
-    }
-
-    private Marble[][] quandrantFromBoard(int nbQuadrant) {
-        Marble[][] quadrant = new Marble[3][3];
-        switch (nbQuadrant) {
-            case 1:
-                for (int i = 0; i < board.length - 3; i++) {
-                    for (int j = 0; j < board.length - 3; j++) {
-                        quadrant[i][j] = board[i][j];
-                    }
-                }
-                break;
-            case 2:
-                for (int i = 0; i < board.length - 3; i++) {
-                    for (int j = 3; j < board.length; j++) {
-                        quadrant[i][j - 3] = board[i][j];
-                    }
-                }
-                break;
-            case 3:
-                for (int i = 3; i < board.length; i++) {
-                    for (int j = 0; j < board.length - 3; j++) {
-                        quadrant[i - 3][j] = board[i][j];
-                    }
-                }
-                break;
-            case 4:
-                for (int i = 3; i < board.length; i++) {
-                    for (int j = 3; j < board.length; j++) {
-                        quadrant[i - 3][j - 3] = board[i][j];
-                    }
-                }
-                break;
-        }
-        return quadrant;
-    }
-
-    private void quadrantToBoard(int nbQuadrant, Marble[][] quadrant) {
-        switch (nbQuadrant) {
-            case 1:
-                for (int i = 0; i < board.length - 3; i++) {
-                    for (int j = 0; j < board.length - 3; j++) {
-                        board[i][j] = quadrant[i][j];
-                    }
-                }
-                break;
-            case 2:
-                for (int i = 0; i < board.length - 3; i++) {
-                    for (int j = 3; j < board.length; j++) {
-                        board[i][j] = quadrant[i][j - 3];
-                    }
-                }
-                break;
-            case 3:
-                for (int i = 3; i < board.length; i++) {
-                    for (int j = 0; j < board.length - 3; j++) {
-                        board[i][j] = quadrant[i - 3][j];
-                    }
-                }
-                break;
-            case 4:
-                for (int i = 3; i < board.length; i++) {
-                    for (int j = 3; j < board.length; j++) {
-                        board[i][j] = quadrant[i - 3][j - 3];
-                    }
-                }
-                break;
-        }
-    }
-
     /**
      * Returns the marble at a certain position on the board.
      *
@@ -160,16 +67,7 @@ public class Board {
      * @return the marble at a certain position on the board.
      */
     Marble getMarbleAtPosition(int x, int y) {
-        return board[x][y];
-    }
-
-    /**
-     * Returns the length side of the board.
-     *
-     * @return the length side of the board.
-     */
-    int getSideBoard() {
-        return board.length;
+        return boardQ[getQuadrantNumber(x, y)].getMarble(getXYQuandrant(x), getXYQuandrant(y));
     }
 
     /**
@@ -199,6 +97,27 @@ public class Board {
         }
         return true;
     }
+    
+    public int getQuadrantNumber(int x, int y) {
+        return x / 3 + 2 * (y / 3);
+    }
+    
+    public int getXQuadrant(int x) {
+        return x % 3;
+    }
+    
+    public int getYQuadrant(int y) {
+        return y % 3; //utiliser une constante à la place de trois!!!!
+    }
+    
+    public int getXYQuandrant(int coord) {
+        return coord % 3;
+    }
+    
+    
+    
+    // Méthode à fort retravailler pour moins de ligne: possibilité d'en avoir
+    // une seule avec paramètre.
 
     private boolean topLeftBottomRightDiagonalCheckWinner() {
         int index = 0;
@@ -346,6 +265,110 @@ public class Board {
             index = 0;
         }
         return false;
+    }
+    
+    
+    
+    
+    
+    
+    
+    // Bientôt inutiles ********************************************************
+    
+    private void swapRows(Marble[][] matrix) {
+        for (int i = 0, j = matrix.length - 1; i < j; i++, j--) {
+            Marble[] x = matrix[i];
+            matrix[i] = matrix[j];
+            matrix[j] = x;
+        }
+    }
+
+    private void transpose(Marble[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = i; j < matrix[0].length; j++) {
+                Marble x = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = x;
+            }
+        }
+    }
+
+    private void rotate(Marble[][] matrix, boolean clockwise) {
+        if (clockwise) {
+            swapRows(matrix);
+            transpose(matrix);
+        } else {
+            transpose(matrix);
+            swapRows(matrix);
+        }
+    }
+
+    private Marble[][] quandrantFromBoard(int nbQuadrant) {
+        Marble[][] quadrant = new Marble[3][3];
+        switch (nbQuadrant) {
+            case 1:
+                for (int i = 0; i < board.length - 3; i++) {
+                    for (int j = 0; j < board.length - 3; j++) {
+                        quadrant[i][j] = board[i][j];
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; i < board.length - 3; i++) {
+                    for (int j = 3; j < board.length; j++) {
+                        quadrant[i][j - 3] = board[i][j];
+                    }
+                }
+                break;
+            case 3:
+                for (int i = 3; i < board.length; i++) {
+                    for (int j = 0; j < board.length - 3; j++) {
+                        quadrant[i - 3][j] = board[i][j];
+                    }
+                }
+                break;
+            case 4:
+                for (int i = 3; i < board.length; i++) {
+                    for (int j = 3; j < board.length; j++) {
+                        quadrant[i - 3][j - 3] = board[i][j];
+                    }
+                }
+                break;
+        }
+        return quadrant;
+    }
+
+    private void quadrantToBoard(int nbQuadrant, Marble[][] quadrant) {
+        switch (nbQuadrant) {
+            case 1:
+                for (int i = 0; i < board.length - 3; i++) {
+                    for (int j = 0; j < board.length - 3; j++) {
+                        board[i][j] = quadrant[i][j];
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; i < board.length - 3; i++) {
+                    for (int j = 3; j < board.length; j++) {
+                        board[i][j] = quadrant[i][j - 3];
+                    }
+                }
+                break;
+            case 3:
+                for (int i = 3; i < board.length; i++) {
+                    for (int j = 0; j < board.length - 3; j++) {
+                        board[i][j] = quadrant[i - 3][j];
+                    }
+                }
+                break;
+            case 4:
+                for (int i = 3; i < board.length; i++) {
+                    for (int j = 3; j < board.length; j++) {
+                        board[i][j] = quadrant[i - 3][j - 3];
+                    }
+                }
+                break;
+        }
     }
 
 }
