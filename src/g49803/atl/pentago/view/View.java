@@ -34,7 +34,7 @@ public class View implements Observer {
      */
     public String askForNewPlayer() {
         System.out.print("Please enter the name of the player number " 
-                + pentago.getNbPlayer() + " : ");
+                + (pentago.getNbPlayer()+1) + " : ");
         return in.nextLine();
     }
     

@@ -16,8 +16,6 @@ public class Pentago implements Observable {
     private final int NB_MAX_PLAYER = 2;
     
     private final int BOARD_SIDE = 6;
-    
-    private static int playerNbAssignement = 1;
 
     private final Board board;
 
@@ -41,7 +39,7 @@ public class Pentago implements Observable {
      * Allows to create a pentago game.
      */
     public Pentago() {
-        board = new Board(BOARD_SIDE);
+        board = new Board();
         players = new ArrayList();
         observerList = new ArrayList();
     }
@@ -54,7 +52,6 @@ public class Pentago implements Observable {
     public void addNewPlayer(String name) {
         if (players.size() < NB_MAX_PLAYER) {
             players.add(new Player(name));
-            playerNbAssignement++;
         } else {
             throw new RuntimeException("There is enough player for this game");
         }
@@ -139,7 +136,7 @@ public class Pentago implements Observable {
         } else {
             currentPlayer = players.get(0);
         }
-        this.notifyObservers();
+//        this.notifyObservers();
         state = State.PLACEMENT;
     }
     
@@ -165,7 +162,7 @@ public class Pentago implements Observable {
      * @return true if a player has won.
      */
     public boolean didAnyoneWin() {
-        return board.checkAlignmentWinner();
+        return false;
     }
 
     /**
@@ -174,7 +171,7 @@ public class Pentago implements Observable {
      * @return true if the game is over.
      */
     public boolean isOver() {
-        return didAnyoneWin() || board.isFull();
+        return didAnyoneWin();
     }
     
     /**
@@ -197,7 +194,7 @@ public class Pentago implements Observable {
      * be added to the game.
      */
     public int getNbPlayer() {
-        return playerNbAssignement;
+        return players.size();
     }
     
     /**
