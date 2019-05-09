@@ -16,7 +16,7 @@ public class Board {
     /**
      * Allows to create a board with a side length precised.
      * 
-     * @param size
+     * @param size the board size.
      */
     Board(int size) {
         board = new Quadrant[NUMBER_OF_QUADRANTS];
@@ -27,25 +27,23 @@ public class Board {
     }
 
     /**
-     * Checks if the cell of the board at the col and row position is empty or
+     * Checks if the cell of the board at x and y position is empty or
      * not.
      *
-     * @param col the colomn concerned.
-     * @param row the row concerned.
+     * @param x the x concerned.
+     * @param y the y concerned.
      * @return true if the cell concerned is empty.
      */
     boolean isEmptyCell(int x, int y) {
-        return board[getQuadrantNumber(x, y)].getMarble(
-                fromBoardToQuadrantCoordinates(x), 
-                fromBoardToQuadrantCoordinates(y)) == null;
+        return getMarbleAtPosition(x, y) == null;
     }
 
     /**
-     * Fill the selected cell at a certain column and a certain row with a
+     * Fill the selected cell at a certain x and a certain y with a
      * marble color.
      *
-     * @param col the colomn concerned.
-     * @param row the row concerned.
+     * @param x the x concerned.
+     * @param y the y concerned.
      * @param marbleColor the marble color to place in the cell.
      */
     void fillCell(int x, int y, Marble marbleColor) {
@@ -75,20 +73,58 @@ public class Board {
     Marble getMarbleAtPosition(int x, int y) {
         return board[getQuadrantNumber(x, y)].getMarble(fromBoardToQuadrantCoordinates(x), fromBoardToQuadrantCoordinates(y));
     }
-
+    
+    /**
+     * This method allows to check if there is a certain repetition (size) 
+     * of a value between (x, y) and the edge of the board 
+     * horizontaly (dx = 1, dy = 0)
+     * verticaly (dx = 0, dy = 1) 
+     * or diagonaly (dx = -1, dy = 1).
+     * 
+     * @param x the x start point.
+     * @param y the y start point.
+     * @param dx the step of the iteration along x axis.
+     * @param dy the step of the iteration along y axis.
+     * @param size the size of the repetition chain.
+     * @return 
+     */
+    Marble checkAlignment(int x, int y, int dx, int dy, int size) {
+        Marble value = getMarbleAtPosition(x, y);
+        int index = 0;
+        if (value != null) {
+             index = 1;
+        }
+        while (x < boardSize && x >= 0 && y < boardSize && y >= 0) {
+            if (value == getMarbleAtPosition(x, y)) {
+                index++;
+            } else {
+                index = 1;
+                value = getMarbleAtPosition(x, y);
+            }
+            if (index == size) {
+                return value;
+            }
+            y += dy;
+            x += dx;
+        }
+        return null;
+    }
+    
     /**
      * Returns true if a player  has managed to line up 5 balls on the board.
      * 
      * @return true if a player  has managed to line up 5 balls on the board.
      */
-    Marble checkAlignmentWinner(int chainLengthToWin, Marble color) {
-        for (int i = 0; i < boardSize; i++) { 
-            if(checkAlignment(i, 0, 0, 1, chainLengthToWin) == color) return color;
-            if(checkAlignment(0, i, 1, 0, chainLengthToWin) == color) return color;
-            if(checkAlignment(0, i, 1, 1, chainLengthToWin) == color) return color;
-            if(checkAlignment(i, 0, 1, 1, chainLengthToWin) == color) return color;
-            if(checkAlignment(5, i, -1, 1, chainLengthToWin) == color) return color;
-            if(checkAlignment(i, 0, -1, 1, chainLengthToWin) == color) return color;
+    Marble checkWinAlignmentFor(Marble marbleColor, int chainLengthToWin) {
+        for (int i = 0; i < boardSize; i++) {
+            if (checkAlignment(0, i, 1, 0, 5) == marbleColor) return marbleColor;
+            if (checkAlignment(i, 0, 0, 1, 5) == marbleColor) return marbleColor;
+            
+            if (checkAlignment(0, i, 1, 1, 5) == marbleColor) return marbleColor;
+            if (checkAlignment(i, 0, 1, 1, 5) == marbleColor) return marbleColor;
+            
+            if (checkAlignment(5, i, -1, 1, 5) == marbleColor) return marbleColor;
+            if (checkAlignment(i, 0, -1, 1, 5) == marbleColor) return marbleColor;
         }
         return null;
     }
@@ -115,27 +151,6 @@ public class Board {
     
     private int fromBoardToQuadrantCoordinates(int coord) {
         return coord % 3; //utiliser une constante à la place de trois!!!!
-    }
-    
-    public Marble checkAlignment(int x, int y, int dx, int dy, int size) {
-        Marble value = getMarbleAtPosition(x, y);
-        int index = 1;
-        
-        
-        for (int i = (dx < 0 && x != 0) ? ((boardSize-1) % x) : x, j = y; 
-            (dx == 1) ? (dy == 1) ? (i < boardSize-1 && j < boardSize-1) : i < boardSize-1 : (dx < 0) ? j < x : j < boardSize-1; 
-             i++, j++) {
-            if (value == getMarbleAtPosition(x + dx, y + dy)) {
-                index++;
-            } else {
-                index = 1;
-                value = getMarbleAtPosition(x, y);
-            }
-            if (index == size) {
-                return value;
-            }
-        }
-        return null;
     }
 
 }

@@ -158,22 +158,7 @@ public class Pentago implements Observable {
      * @return true if a player has won.
      */
     boolean didAnyoneWin() {
-        boolean winnerIndex = false;
-        int numberOfWinner = 0;
-        for (Player player : players) {
-            if (board.checkAlignmentWinner(5, player.getColor()) == player.getColor()) {
-                numberOfWinner++;
-                winner = player;
-                winnerIndex = true;
-            }
-            if (numberOfWinner == players.size()) {
-                winner = null;
-            }
-            if (winner != null) {
-                System.out.println("Winner ? " + winner.getName());
-            }
-        }
-        return winnerIndex;
+        return board.checkWinAlignmentFor(currentPlayer.getColor(), BOARD_SIDE) != null;
     }
     
     public Player getWinner() {
