@@ -18,7 +18,7 @@ public class Board {
      * 
      * @param size
      */
-    public Board(int size) {
+    Board(int size) {
         board = new Quadrant[NUMBER_OF_QUADRANTS];
         boardSize = size;
         for (int i = 0; i < board.length; i++) {
