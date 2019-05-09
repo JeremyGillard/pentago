@@ -1,7 +1,8 @@
 package g49803.atl.pentago.model;
 
 /**
- *
+ * This class is a special exception for the pentago game.
+ * 
  * @author Jeremy Gillard
  */
 public class GameStateException extends IllegalStateException {
