@@ -1,10 +1,7 @@
 package g49803.atl.pentago.fxview;
 
 import g49803.atl.pentago.model.GameStateException;
-import g49803.atl.pentago.model.Marble;
 import g49803.atl.pentago.model.Pentago;
-import g49803.atl.pentago.model.State;
-import g49803.atl.pentago.util.Observer;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.effect.Lighting;
@@ -22,15 +19,11 @@ import javafx.scene.shape.Circle;
  *
  * @author Jeremy Gillard
  */
-public class Piece extends Circle implements Observer {
+public class Piece extends Circle {
 
     private static final int RADIUS = 35;
 
     private final Pentago pentago;
-
-    private final int Xposition;
-
-    private final int Yposition;
 
     private final int quadrantNumber;
 
@@ -53,8 +46,6 @@ public class Piece extends Circle implements Observer {
         super(RADIUS);
         this.pentago = pentago;
         this.quadrantNumber = quadrantNumber;
-        this.Xposition = xPositionAccordingQuadrant(Xposition);
-        this.Yposition = yPositionAccordingQuadrant(Yposition);
         this.lighting = lightingVisualEffect;
         visualInitialization();
         behavior();
@@ -83,8 +74,6 @@ public class Piece extends Circle implements Observer {
     }
 
     private void behavior() {
-        pentago.addObserver(this);
-
         this.setOnMouseEntered((event) -> {
             this.getScene().setCursor(Cursor.HAND);
         });
@@ -96,7 +85,7 @@ public class Piece extends Circle implements Observer {
         this.setOnMouseClicked((event) -> {
             System.out.println("ClickLoc (" + xPositionAccordingQuadrant(GridPane.getColumnIndex(this)) + ", " + yPositionAccordingQuadrant(GridPane.getRowIndex(this)) + ")");
             try {
-                pentago.placeMarble(yPositionAccordingQuadrant(GridPane.getRowIndex(this)), xPositionAccordingQuadrant(GridPane.getColumnIndex(this)));
+                pentago.placeMarble(xPositionAccordingQuadrant(GridPane.getColumnIndex(this)), yPositionAccordingQuadrant(GridPane.getRowIndex(this)));
                 placeMarbleSound();
             } catch (IllegalArgumentException | GameStateException e) {
                 Parent parent = this.getParent();
@@ -112,20 +101,5 @@ public class Piece extends Circle implements Observer {
         AudioClip sound = new AudioClip("file:media/sound/placingPiece.wav");
         sound.setVolume(1);
         sound.play();
-    }
-
-    @Override
-    public void update() {
-        if (pentago.getCurrentGameState() == State.PLACEMENT) {
-            if (pentago.getLastXPlacement() == Xposition && pentago.getLastYPlacement() == Yposition) {
-                if (pentago.getCurrentPlayer().getColor() == Marble.BLACK) {
-                    setFill(Color.rgb(0, 0, 0));
-                    setEffect(lighting);
-                } else {
-                    setFill(Color.rgb(255, 230, 158));
-                    setEffect(lighting);
-                }
-            }
-        }
     }
 }

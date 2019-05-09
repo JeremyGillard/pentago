@@ -57,7 +57,8 @@ public class RotationButton extends StackPane {
         label.setOnMouseClicked((event) -> {
             circle.setFill(Color.rgb(238, 195, 157));
             try {
-                this.pentago.rotateQuadrant(quadrantNumber, clockwise);
+                System.out.println(clockwise);
+                this.pentago.rotateQuadrant(quadrantNumber-1, clockwise);
                 slideClickSound();
             } catch (IllegalArgumentException | GameStateException e) {
                 Parent parent = this.getParent();

@@ -17,10 +17,7 @@ public class Board extends GridPane {
     
     private final Pentago pentago;
 
-    private Quadrant quadrantI;
-    private Quadrant quadrantII;
-    private Quadrant quadrantIII;
-    private Quadrant quadrantIV;
+    private final Quadrant[] board;
 
     private RotationButton quadILeft;
     private RotationButton quadIRight;
@@ -44,16 +41,16 @@ public class Board extends GridPane {
      */
     Board(Pentago pentago, Lighting lightEffect) {
         this.pentago = pentago;
+        this.board = new Quadrant[4];
         this.lightEffect = lightEffect;
         initContent();
         initBoard();
     }
 
     private void initContent() {
-        quadrantI = new Quadrant(1, pentago, lightEffect);
-        quadrantII = new Quadrant(2, pentago, lightEffect);
-        quadrantIII = new Quadrant(3, pentago, lightEffect);
-        quadrantIV = new Quadrant(4, pentago, lightEffect);
+        for (int i = 0; i < board.length; i++) {
+            board[i] = new Quadrant(i+1, pentago, lightEffect);
+        }
 
         quadILeft = new RotationButton(1, false, pentago, lightEffect);
         quadILeft.setShape(new Circle(20));
@@ -80,22 +77,22 @@ public class Board extends GridPane {
         this.add(quadILeft, 0, 1);
         this.add(quadIRight, 1, 0);
         setHalignment(quadIRight, HPos.CENTER);
-        this.add(quadrantI, 1, 1);
+        this.add(board[0], 1, 1);
 
         this.add(quadIILeft, 2, 0);
         setHalignment(quadIILeft, HPos.CENTER);
         this.add(quadIIRight, 3, 1);
-        this.add(quadrantII, 2, 1);
+        this.add(board[1], 2, 1);
 
         this.add(quadIIILeft, 1, 3);
         setHalignment(quadIIILeft, HPos.CENTER);
         this.add(quadIIIRight, 0, 2);
-        this.add(quadrantIII, 1, 2);
+        this.add(board[2], 1, 2);
 
         this.add(quadIVLeft, 3, 2);
         this.add(quadIVRight, 2, 3);
         setHalignment(quadIVRight, HPos.CENTER);
-        this.add(quadrantIV, 2, 2);
+        this.add(board[3], 2, 2);
 
         this.setHgap(10);
         this.setVgap(10);

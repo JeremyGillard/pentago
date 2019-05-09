@@ -22,14 +22,12 @@ public class Pentago implements Observable {
     private final List<Player> players;
 
     private Player currentPlayer;
+    
+    private Player winner;
 
     private State state;
 
     private final List<Observer> observerList;
-    
-    private int lastXPlacement;
-    
-    private int lastYPlacement;
     
     private int lastQuadrantRotated;
     
@@ -39,7 +37,7 @@ public class Pentago implements Observable {
      * Allows to create a pentago game.
      */
     public Pentago() {
-        board = new Board();
+        board = new Board(BOARD_SIDE);
         players = new ArrayList();
         observerList = new ArrayList();
     }
@@ -84,22 +82,20 @@ public class Pentago implements Observable {
     /**
      * Allows to place a marble on the board at coordinates (col, row).
      * 
-     * @param col the column of the coordonitates
-     * @param row the row of the coordinates
+     * @param x the column of the coordonitates
+     * @param y the row of the coordinates
      */
-    public void placeMarble(int col, int row) {
+    public void placeMarble(int x, int y) {
         checkState(State.PLACEMENT);
-        if (!board.isEmptyCell(col, row)) {
+        if (!board.isEmptyCell(x, y)) {
             throw new IllegalArgumentException("There is already a marble "
                     + "in this cell");
         }
-        if (col >= BOARD_SIDE || row >= BOARD_SIDE) {
+        if (x >= BOARD_SIDE || y >= BOARD_SIDE) {
             throw new IllegalArgumentException("The coordinates entered "
                     + "are outside the area covered by the board");
         }
-        board.fillCell(col, row, currentPlayer.getColor());
-        lastXPlacement = col;
-        lastYPlacement = row;
+        board.fillCell(x, y, currentPlayer.getColor());
         if (didAnyoneWin()) {
             state = State.OVER;
         }
@@ -161,8 +157,27 @@ public class Pentago implements Observable {
      * 
      * @return true if a player has won.
      */
-    public boolean didAnyoneWin() {
-        return false;
+    boolean didAnyoneWin() {
+        boolean winnerIndex = false;
+        int numberOfWinner = 0;
+        for (Player player : players) {
+            if (board.checkAlignmentWinner(5, player.getColor()) == player.getColor()) {
+                numberOfWinner++;
+                winner = player;
+                winnerIndex = true;
+            }
+            if (numberOfWinner == players.size()) {
+                winner = null;
+            }
+            if (winner != null) {
+                System.out.println("Winner ? " + winner.getName());
+            }
+        }
+        return winnerIndex;
+    }
+    
+    public Player getWinner() {
+        return winner;
     }
 
     /**
@@ -171,6 +186,7 @@ public class Pentago implements Observable {
      * @return true if the game is over.
      */
     public boolean isOver() {
+        System.out.println("isOver? " + didAnyoneWin());
         return didAnyoneWin();
     }
     
@@ -195,24 +211,6 @@ public class Pentago implements Observable {
      */
     public int getNbPlayer() {
         return players.size();
-    }
-    
-    /**
-     * Returns the x position of the last marble placement.
-     * 
-     * @return the x position of the last marble placement.
-     */
-    public int getLastXPlacement() {
-        return lastXPlacement;
-    }
-    
-    /**
-     * Returns the y position of the last marble placement.
-     * 
-     * @return the y position of the last marble placement.
-     */
-    public int getLastYPlacement() {
-        return lastYPlacement;
     }
     
     /**

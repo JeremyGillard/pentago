@@ -24,6 +24,7 @@ public class Controller {
     public Controller(Pentago pentago, View view) {
         this.pentago = pentago;
         this.view = view;
+        this.pentago.addObserver(this.view);
     }
 
     /**
@@ -40,9 +41,8 @@ public class Controller {
         }
 
         pentago.start();
-        pentago.addObserver(view);
 
-        mainGameFlow();
+        this.mainGameFlow();
 
         view.displayWinner();
 
@@ -57,7 +57,7 @@ public class Controller {
                         Integer.parseInt(placeMarbleCmd[1]));
 
                 String[] turnQuadrantCmd = view.turnQuadrantCmd();
-                pentago.rotateQuadrant(Integer.parseInt(turnQuadrantCmd[0]),
+                pentago.rotateQuadrant(Integer.parseInt(turnQuadrantCmd[0])-1,
                         Integer.parseInt(turnQuadrantCmd[1]) == 1);
             } catch (GameStateException e) {
                 break;

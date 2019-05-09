@@ -11,23 +11,21 @@ package g49803.atl.pentago.model;
  */
 public class Quadrant {
     
-    private static final int QUADRANT_SIDE = 3;
-    
     private final Marble[][] quadrant;
     
-    public Quadrant() {
-        quadrant = new Marble[QUADRANT_SIDE][QUADRANT_SIDE];
+    Quadrant(int size) {
+        quadrant = new Marble[size][size];
     }
     
-    public void placeMarble(int x, int y, Marble marbleColor) {
+    void placeMarble(int x, int y, Marble marbleColor) {
         quadrant[y][x] = marbleColor;
     }
     
-    public Marble getMarble(int x, int y) {
+    Marble getMarble(int x, int y) {
         return quadrant[y][x];
     }
     
-    public void rotate(boolean clockwise) {
+    void rotate(boolean clockwise) {
         if (clockwise) {
             swapRows();
             transpose();

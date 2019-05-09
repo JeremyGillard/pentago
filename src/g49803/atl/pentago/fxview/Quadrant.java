@@ -5,7 +5,6 @@ import g49803.atl.pentago.model.State;
 import g49803.atl.pentago.util.Observer;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
@@ -15,7 +14,6 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 /**
@@ -89,11 +87,13 @@ public class Quadrant extends StackPane implements Observer {
         if (pentago.getCurrentGameState() == State.ROTATION) {
             if (pentago.getLastQuadrantRotated() == quadrantNumber) {
                 if (pentago.isLastRotationClockwise()) {
+                    System.out.println("TEST 90");
                     transition.setByAngle(90);
                     transition.setOnFinished((ActionEvent e) -> {
                         piecePlacement.setRotate(piecePlacement.getRotate()-90);
                     });
                 } else {
+                    System.out.println("TEST-90");
                     transition.setByAngle(-90);
                     transition.setOnFinished((ActionEvent e) -> {
                         piecePlacement.setRotate(piecePlacement.getRotate()+90);

@@ -7,15 +7,22 @@ package g49803.atl.pentago.model;
  */
 public class Board {
     
+    private final int boardSize;
+    
+    private final static int NUMBER_OF_QUADRANTS = 4;
+    
     private final Quadrant[] board;
 
     /**
      * Allows to create a board with a side length precised.
+     * 
+     * @param size
      */
-    public Board() {
-        board = new Quadrant[4];
+    public Board(int size) {
+        board = new Quadrant[NUMBER_OF_QUADRANTS];
+        boardSize = size;
         for (int i = 0; i < board.length; i++) {
-            board[i] = new Quadrant();
+            board[i] = new Quadrant(boardSize / (NUMBER_OF_QUADRANTS/2));
         }
     }
 
@@ -52,10 +59,10 @@ public class Board {
      * the opposite of clockwise direction.
      *
      * @param quadrantPosition the quadrant to be turned.
-     * @param direction the direction in which to turn the quadrant.
+     * @param clockWise the direction in which to turn the quadrant.
      */
-    void turnQuadrant(int quadrantPosition, boolean direction) {
-        board[quadrantPosition].rotate(direction);
+    void turnQuadrant(int quadrantPosition, boolean clockWise) {
+        board[quadrantPosition].rotate(clockWise);
     }
 
     /**
@@ -69,33 +76,38 @@ public class Board {
         return board[getQuadrantNumber(x, y)].getMarble(fromBoardToQuadrantCoordinates(x), fromBoardToQuadrantCoordinates(y));
     }
 
-//    /**
-//     * Returns true if a player  has managed to line up 5 balls on the board.
-//     * 
-//     * @return true if a player  has managed to line up 5 balls on the board.
-//     */
-//    boolean checkAlignmentWinner() {
-//        return (topLeftBottomRightDiagonalCheckWinner() || 
-//                topRightBottomLeftDiagonalCheckWinner() || 
-//                horizontalCheckWinner() || 
-//                verticalCheckWinner());
-//    }
-//    
-//    /**
-//     * Returns true if the board of the game is full.
-//     * 
-//     * @return true if the board of the game is full.
-//     */
-//    boolean isFull() {
-//        for (Marble[] marbles : board) {
-//            for (Marble marble : marbles) {
-//                if (marble == null) {
-//                    return false;
-//                }
-//            }
-//        }
-//        return true;
-//    }
+    /**
+     * Returns true if a player  has managed to line up 5 balls on the board.
+     * 
+     * @return true if a player  has managed to line up 5 balls on the board.
+     */
+    Marble checkAlignmentWinner(int chainLengthToWin, Marble color) {
+        for (int i = 0; i < boardSize; i++) { 
+            if(checkAlignment(i, 0, 0, 1, chainLengthToWin) == color) return color;
+            if(checkAlignment(0, i, 1, 0, chainLengthToWin) == color) return color;
+            if(checkAlignment(0, i, 1, 1, chainLengthToWin) == color) return color;
+            if(checkAlignment(i, 0, 1, 1, chainLengthToWin) == color) return color;
+            if(checkAlignment(5, i, -1, 1, chainLengthToWin) == color) return color;
+            if(checkAlignment(i, 0, -1, 1, chainLengthToWin) == color) return color;
+        }
+        return null;
+    }
+    
+    /**
+     * Returns true if the board of the game is full.
+     * 
+     * @return true if the board of the game is full.
+     */
+    boolean isFull() {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                if (getMarbleAtPosition(i, j) == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     
     private int getQuadrantNumber(int x, int y) {
         return x / 3 + 2 * (y / 3);
@@ -105,157 +117,25 @@ public class Board {
         return coord % 3; //utiliser une constante à la place de trois!!!!
     }
     
-    
-    
-//    // Méthode à fort retravailler pour moins de ligne: possibilité d'en avoir
-//    // une seule avec paramètre.
-//
-//    private boolean topLeftBottomRightDiagonalCheckWinner() {
-//        int index = 0;
-//        Marble previousValue = board[1][0];
-//        for (int i = 1; i < board.length; i++) {
-//            if (previousValue == board[i][i - 1] && previousValue != null) {
-//                index++;
-//            } else {
-//                if (index == 5) {
-//                    return true;
-//                }
-//                index = 1;
-//                previousValue = board[i][i - 1];
-//            }
-//        }
-//        if (index == 5) {
-//            return true;
-//        }
-//        index = 0;
-//        previousValue = board[0][0];
-//        for (int i = 0; i < board.length; i++) {
-//            if (previousValue == board[i][i] && previousValue != null) {
-//                index++;
-//            } else {
-//                if (index == 5) {
-//                    return true;
-//                }
-//                index = 1;
-//                previousValue = board[i][i];
-//            }
-//        }
-//        if (index == 5) {
-//            return true;
-//        }
-//        index = 0;
-//        previousValue = board[0][1];
-//        for (int i = 1; i < board.length; i++) {
-//            if (previousValue == board[i - 1][i] && previousValue != null) {
-//                index++;
-//            } else {
-//                if (index == 5) {
-//                    return true;
-//                }
-//                index = 1;
-//                previousValue = board[i - 1][i];
-//            }
-//        }
-//        return index == 5;
-//    }
-//
-//    private boolean topRightBottomLeftDiagonalCheckWinner() {
-//        int index = 0;
-//        Marble previousValue = board[0][4];
-//        for (int i = 0, j = 4; i < board.length - 1; i++, j--) {
-//            if (previousValue == board[i][j] && previousValue != null) {
-//                index++;
-//            } else {
-//                if (index == 5) {
-//                    return true;
-//                }
-//                index = 1;
-//                previousValue = board[i][j];
-//            }
-//        }
-//        if (index == 5) {
-//            return true;
-//        }
-//
-//        index = 0;
-//        previousValue = board[0][5];
-//        for (int i = 0, j = 5; i < board.length; i++, j--) {
-//            if (previousValue == board[i][j] && previousValue != null) {
-//                index++;
-//            } else {
-//                if (index == 5) {
-//                    return true;
-//                }
-//                index = 1;
-//                previousValue = board[i][j];
-//            }
-//        }
-//        if (index == 5) {
-//            return true;
-//        }
-//
-//        index = 0;
-//        previousValue = board[1][5];
-//        for (int i = 1, j = 5; i < board.length; i++, j--) {
-//            if (previousValue == board[i][j] && previousValue != null) {
-//                index++;
-//            } else {
-//                if (index == 5) {
-//                    return true;
-//                }
-//                index = 1;
-//                previousValue = board[i][j];
-//            }
-//        }
-//        return index == 5;
-//    }
-//
-//    private boolean horizontalCheckWinner() {
-//        int index = 0;
-//        Marble previousValue;
-//        for (int i = 0; i < board.length; i++) {
-//            previousValue = board[i][0];
-//            for (int j = 0; j < board.length; j++) {
-//                if (previousValue == board[i][j]  && previousValue != null) {
-//                    index++;
-//                } else {
-//                    if (index == 5) {
-//                        return true;
-//                    }
-//                    index = 1;
-//                    previousValue = board[i][j];
-//                }
-//            }
-//            if (index == 5) {
-//                return true;
-//            }
-//            index = 0;
-//        }
-//        return false;
-//    }
-//
-//    private boolean verticalCheckWinner() {
-//        int index = 0;
-//        Marble previousValue;
-//        for (int i = 0; i < board.length; i++) {
-//            previousValue = board[0][i];
-//            for (int j = 0; j < board.length; j++) {
-//                if (previousValue == board[j][i] && previousValue != null) {
-//                    index++;
-//                } else {
-//                    if (index == 5) {
-//                        return true;
-//                    }
-//                    index = 1;
-//                    previousValue = board[j][i];
-//                }
-//            }
-//            if (index == 5) {
-//                return true;
-//            }
-//            index = 0;
-//        }
-//        return false;
-//    }
+    public Marble checkAlignment(int x, int y, int dx, int dy, int size) {
+        Marble value = getMarbleAtPosition(x, y);
+        int index = 1;
+        
+        
+        for (int i = (dx < 0 && x != 0) ? ((boardSize-1) % x) : x, j = y; 
+            (dx == 1) ? (dy == 1) ? (i < boardSize-1 && j < boardSize-1) : i < boardSize-1 : (dx < 0) ? j < x : j < boardSize-1; 
+             i++, j++) {
+            if (value == getMarbleAtPosition(x + dx, y + dy)) {
+                index++;
+            } else {
+                index = 1;
+                value = getMarbleAtPosition(x, y);
+            }
+            if (index == size) {
+                return value;
+            }
+        }
+        return null;
+    }
 
 }
