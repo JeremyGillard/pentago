@@ -1,4 +1,5 @@
-<img src="./media/img/icon.png" width="60" height="60"> # Pentago
+<img src="./media/img/icon.png" width="60" height="60"> 
+# Pentago
 
 ## Description
 
