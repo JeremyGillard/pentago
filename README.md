@@ -1,5 +1,4 @@
-![Pentago-Icon](./media/img/icon.png "Pentago")
-# Pentago
+# Pentago ![Pentago-Icon](./media/img/icon.png =100)
 
 ## Description
 
