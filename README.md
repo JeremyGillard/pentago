@@ -1,4 +1,4 @@
-![Pentago-Icon](https://git.esi-bru.be/ATLIR4-2018-19/D223Ind/Pentago-Gillard/blob/master/media/img/icon.png)
+![Pentago-Icon](./media/img/icon.png)
 # Pentago
 
 ## Description
