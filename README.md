@@ -1,4 +1,4 @@
-# Pentago  ![Pentago-Icon](./media/img/icon.png "Pentago" =50x50)
+# Pentago  ![Pentago-Icon](./media/img/icon.png "Pentago" =50x50) <img src="./media/img/icon.png" width="50" height="50">
 
 ## Description
 
