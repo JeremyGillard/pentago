@@ -5,6 +5,7 @@ import g49803.atl.pentago.model.Pentago;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 /**
@@ -15,6 +16,7 @@ public class App extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+        initSurroundingMusic();
         
         Pentago pentago = new Pentago();
         ConsolView consolView = new ConsolView(pentago); // A RETIRER
@@ -36,6 +38,12 @@ public class App extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public void initSurroundingMusic() {
+        AudioClip sound = new AudioClip("file:media/sound/Jazz.wav");
+        sound.setVolume(0.1);
+        sound.play();
     }
     
 }
