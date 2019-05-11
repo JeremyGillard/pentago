@@ -49,7 +49,7 @@ public class Board extends GridPane {
 
     private void initContent() {
         for (int i = 0; i < board.length; i++) {
-            board[i] = new Quadrant(i+1, pentago, lightEffect);
+            board[i] = new Quadrant(i, pentago, lightEffect);
         }
 
         quadILeft = new RotationButton(1, false, pentago, lightEffect);

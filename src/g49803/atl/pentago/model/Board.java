@@ -111,9 +111,13 @@ public class Board {
     }
     
     /**
-     * Returns true if a player  has managed to line up 5 balls on the board.
+     * Returns the marbleColor if there is an alignment of chainLengthToWin on
+     * the board.
      * 
-     * @return true if a player  has managed to line up 5 balls on the board.
+     * @param marbleColor the color alignment to check.
+     * @param chainLengthToWin to size of the alignment.
+     * @return the marbleColor if there is an alignment of chainLengthToWin on
+     * the board.
      */
     Marble checkWinAlignmentFor(Marble marbleColor, int chainLengthToWin) {
         for (int i = 0; i < boardSize; i++) {

@@ -2,7 +2,7 @@ package g49803.atl.pentago.controller;
 
 import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.model.GameStateException;
-import g49803.atl.pentago.view.View;
+import g49803.atl.pentago.consoleView.View;
 
 /**
  * It's in this class that the dynamics of the game operate.

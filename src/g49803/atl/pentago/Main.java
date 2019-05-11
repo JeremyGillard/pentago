@@ -2,7 +2,7 @@ package g49803.atl.pentago;
 
 import g49803.atl.pentago.controller.Controller;
 import g49803.atl.pentago.model.Pentago;
-import g49803.atl.pentago.view.View;
+import g49803.atl.pentago.consoleView.View;
 
 /**
  * This class is the focus of our application. It's in charge of launching the

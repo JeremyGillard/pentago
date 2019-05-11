@@ -22,8 +22,6 @@ public class Pentago implements Observable {
     private final List<Player> players;
 
     private Player currentPlayer;
-    
-    private Player winner;
 
     private State state;
 
@@ -159,10 +157,6 @@ public class Pentago implements Observable {
      */
     boolean didAnyoneWin() {
         return board.checkWinAlignmentFor(currentPlayer.getColor(), BOARD_SIDE) != null;
-    }
-    
-    public Player getWinner() {
-        return winner;
     }
 
     /**
