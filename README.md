@@ -1,3 +1,4 @@
+![Pentago-Icon](https://git.esi-bru.be/ATLIR4-2018-19/D223Ind/Pentago-Gillard/blob/master/media/img/icon.png)
 # Pentago
 
 ## Description
@@ -12,7 +13,7 @@ See more rules informations [here](PentagoRulesStrategy.pdf).
 
 Java build tool used: Ant
 
-### Code
+### Code (additional information - comments)
 
 ### Other
 The commits structure are highly inspired by the Angular "Commit Message Conventions".
