@@ -1,5 +1,4 @@
-<img src="./media/img/icon.png" width="60" height="60"> 
-# Pentago
+# Pentago <img src="./media/img/icon.png" width="40" height="40"> 
 
 ## Description
 
@@ -32,7 +31,7 @@ NB: (Customization) In my projects, I will try at best to refer to parts of Mode
 
 In the future, I would also like to draw inspiration from the advice given in [this article](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project) in my future projects.
 
-### Licensing
+## Licensing
 
 With confirmation from my laboratory supervisor I would like to post this project on my personal github with the license below (to be confirmed).
 
