@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package g49803.atl.pentago.view.layout;
+package g49803.atl.pentago.gui.layout;
 
 import g49803.atl.pentago.model.Marble;
 import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.model.State;
 import g49803.atl.pentago.util.Observer;
-import g49803.atl.pentago.view.components.ButtonComponent;
-import g49803.atl.pentago.view.components.IdentityPlayerFrame;
-import g49803.atl.pentago.view.components.QuadrantFrame;
-import g49803.atl.pentago.view.components.RotationButtonComponent;
+import g49803.atl.pentago.gui.components.ButtonComponent;
+import g49803.atl.pentago.gui.components.IdentityPlayerFrame;
+import g49803.atl.pentago.gui.components.QuadrantFrame;
+import g49803.atl.pentago.gui.components.RotationButtonComponent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;

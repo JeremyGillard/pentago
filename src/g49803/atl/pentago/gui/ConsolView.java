@@ -1,4 +1,4 @@
-package g49803.atl.pentago.view;
+package g49803.atl.pentago.gui;
 
 import g49803.atl.pentago.model.Marble;
 import g49803.atl.pentago.model.Pentago;

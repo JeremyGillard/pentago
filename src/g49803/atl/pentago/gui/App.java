@@ -1,6 +1,6 @@
-package g49803.atl.pentago.view;
+package g49803.atl.pentago.gui;
 
-import g49803.atl.pentago.view.layout.IntroductionLayout;
+import g49803.atl.pentago.gui.layout.IntroductionLayout;
 import g49803.atl.pentago.model.Pentago;
 import javafx.application.Application;
 import javafx.scene.Scene;

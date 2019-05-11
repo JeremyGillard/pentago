@@ -1,4 +1,4 @@
-package g49803.atl.pentago.view.components;
+package g49803.atl.pentago.gui.components;
 
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;

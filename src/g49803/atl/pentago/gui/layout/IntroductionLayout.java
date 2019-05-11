@@ -1,7 +1,7 @@
-package g49803.atl.pentago.view.layout;
+package g49803.atl.pentago.gui.layout;
 
 import g49803.atl.pentago.model.Pentago;
-import g49803.atl.pentago.view.components.ButtonComponent;
+import g49803.atl.pentago.gui.components.ButtonComponent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;

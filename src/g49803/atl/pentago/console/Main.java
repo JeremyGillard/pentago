@@ -1,8 +1,8 @@
-package g49803.atl.pentago;
+package g49803.atl.pentago.console;
 
-import g49803.atl.pentago.controller.Controller;
+import g49803.atl.pentago.console.controller.Controller;
 import g49803.atl.pentago.model.Pentago;
-import g49803.atl.pentago.consoleView.View;
+import g49803.atl.pentago.console.view.View;
 
 /**
  * This class is the focus of our application. It's in charge of launching the

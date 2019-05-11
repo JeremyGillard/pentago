@@ -1,6 +1,6 @@
-package g49803.atl.pentago.view.components;
+package g49803.atl.pentago.gui.components;
 
-import g49803.atl.pentago.view.layout.GameLayout;
+import g49803.atl.pentago.gui.layout.GameLayout;
 import g49803.atl.pentago.model.GameStateException;
 import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.util.Observer;
