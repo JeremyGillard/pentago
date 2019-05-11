@@ -1,4 +1,4 @@
-# Pentago <img src="./media/img/icon.png" width="60" height="60">
+<img src="./media/img/icon.png" width="60" height="60"> # Pentago
 
 ## Description
 
@@ -6,7 +6,7 @@ Pentago is a strategy game for two players. As illustrated in Figure 1, it consi
 
 See more rules informations [here](PentagoRulesStrategy.pdf).
 
-NB: small rule change: even if two players have lined up 5 balls after turning a quadrant, only the current player will be designated as the winner.
+NB: (small rule change) even if two players have lined up 5 balls after turning a quadrant, only the current player will be designated as the winner.
 
 ## Model Structure
 
@@ -35,7 +35,7 @@ In the future, I would also like to draw inspiration from the advice given in [t
 
 With confirmation from my laboratory supervisor I would like to post this project on my personal github with the license below (to be confirmed).
 
-Question: Can a real game under private license be licensed to copy-left in the "digital world"?
+**Question: Can a real game under private license be licensed to copy-left in the "digital world"?**
 
 This app is Licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE) for the full license text.
 
