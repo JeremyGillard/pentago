@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class Pentago implements Observable {
 
-    private final int NB_MAX_PLAYER = 2;
+    private static final int NB_MAX_PLAYER = 2;
     
-    private final int BOARD_SIDE = 6;
+    private static final int BOARD_SIDE = 6;
 
     private final Board board;
 
@@ -130,7 +130,6 @@ public class Pentago implements Observable {
         } else {
             currentPlayer = players.get(0);
         }
-//        this.notifyObservers();
         state = State.PLACEMENT;
     }
     
