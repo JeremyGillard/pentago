@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g49803.atl.pentago.gui.layout;
 
 import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.gui.components.ButtonComponent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -25,8 +19,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Jeremy
+ * This class allows to display the end layout of the pentago game.
+ * 
+ * @author Jeremy Gillard
  */
 public class EndLayout extends StackPane {
     
@@ -36,6 +31,11 @@ public class EndLayout extends StackPane {
     
     private Label winnerLabel;
     
+    /**
+     * Allows to create the end layout of the pentago game.
+     * 
+     * @param winnerName the name of the potential winner.
+     */
     public EndLayout(String winnerName) {
         winnerSounds();
         initWinnerLabel(winnerName);
@@ -44,7 +44,10 @@ public class EndLayout extends StackPane {
         ButtonComponent buttonRestart = new ButtonComponent("Restart");
         buttonRestartBehavior(buttonRestart);
         buttonQuitBehavior(buttonQuit);
-        
+        arrangement(buttonRestart, buttonQuit);
+    }
+
+    private void arrangement(ButtonComponent buttonRestart, ButtonComponent buttonQuit) {
         endRoot.getChildren().addAll(winnerLabel, buttonRestart, buttonQuit);
         this.getChildren().addAll(imageView, endRoot);
     }

@@ -12,11 +12,18 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 /**
- *
+ * This class allows to display the buttons of the game with a certain graphic 
+ * charter and some default behaviors.
+ * 
  * @author Jeremy
  */
 public class ButtonComponent extends Button {
     
+    /**
+     * Allows to create a button with a certain displayed label.
+     * 
+     * @param label the label to display.
+     */
     public ButtonComponent(String label) {
         super(label);
         arrangement();

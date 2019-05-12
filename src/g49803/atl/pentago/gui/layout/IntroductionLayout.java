@@ -4,7 +4,6 @@ import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.gui.components.ButtonComponent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,7 +20,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
- *
+ * This class allows to display the pentago introduction asking player's names.
+ * 
  * @author Jeremy
  */
 public class IntroductionLayout extends StackPane {
@@ -32,6 +32,11 @@ public class IntroductionLayout extends StackPane {
     
     private TextField textFieldSecondPlayer;
     
+    /**
+     * Allows to create the introduction layout of the pentago game.
+     * 
+     * @param pentago the pentago to play.
+     */
     public IntroductionLayout(Pentago pentago) {
         this.pentago = pentago;
         

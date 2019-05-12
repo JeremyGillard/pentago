@@ -30,8 +30,6 @@ public class PieceComponent extends Circle implements Observer {
 
     private final int yPosition;
 
-    private final int quadrantNumber;
-
     private final Lighting lighting;
 
     /**
@@ -39,7 +37,6 @@ public class PieceComponent extends Circle implements Observer {
      * relation to the board pentago game, a number of quadrant, a pentago game
      * model and a light effect.
      *
-     * @param quadrantNumber the quadrant number in which the piece is located.
      * @param Xposition the x position of the piece in relation to the board
      * pentago game.
      * @param Yposition the y position of the piece in relation to the board
@@ -47,13 +44,12 @@ public class PieceComponent extends Circle implements Observer {
      * @param pentago the pentago model
      * @param lightingVisualEffect the visual effect.
      */
-    public PieceComponent(int quadrantNumber, int Xposition, int Yposition, Pentago pentago, Lighting lightingVisualEffect) {
+    public PieceComponent(int Xposition, int Yposition, Pentago pentago, Lighting lightingVisualEffect) {
         super(RADIUS);
         this.pentago = pentago;
         this.pentago.addObserver(this);
         this.xPosition = Xposition;
         this.yPosition = Yposition;
-        this.quadrantNumber = quadrantNumber;
         this.lighting = lightingVisualEffect;
         visualInitialization();
         behavior();
@@ -73,7 +69,8 @@ public class PieceComponent extends Circle implements Observer {
         this.setOnMouseExited((event) -> {
             try {
                 this.getScene().setCursor(Cursor.DEFAULT);
-            } catch (NullPointerException e) {}
+            } catch (NullPointerException e) {
+            }
         });
 
         this.setOnMouseClicked((event) -> {
@@ -97,21 +94,23 @@ public class PieceComponent extends Circle implements Observer {
                     new Stop[]{new Stop(0, Color.rgb(168, 125, 87)),
                         new Stop(1, Color.rgb(134, 112, 80))}));
             this.setEffect(null);
-        } else switch (pentago.getMarbleAt(xPosition, yPosition)) {
-            case BLACK:
-                this.setFill(Color.rgb(0, 0, 0));
-                this.setEffect(lighting);
-                break;
-            case WHITE:
-                this.setFill(Color.rgb(255, 230, 158));
-                this.setEffect(lighting);
-                break;
-            default:
-                this.setFill(new LinearGradient(0f, 0f, 0f, 1f, true, CycleMethod.NO_CYCLE,
-                        new Stop[]{new Stop(0, Color.rgb(168, 125, 87)),
-                            new Stop(1, Color.rgb(134, 112, 80))}));
-                this.setEffect(null);
-                break;
+        } else {
+            switch (pentago.getMarbleAt(xPosition, yPosition)) {
+                case BLACK:
+                    this.setFill(Color.rgb(0, 0, 0));
+                    this.setEffect(lighting);
+                    break;
+                case WHITE:
+                    this.setFill(Color.rgb(255, 230, 158));
+                    this.setEffect(lighting);
+                    break;
+                default:
+                    this.setFill(new LinearGradient(0f, 0f, 0f, 1f, true, CycleMethod.NO_CYCLE,
+                            new Stop[]{new Stop(0, Color.rgb(168, 125, 87)),
+                                new Stop(1, Color.rgb(134, 112, 80))}));
+                    this.setEffect(null);
+                    break;
+            }
         }
     }
 

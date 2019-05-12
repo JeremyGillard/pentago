@@ -165,8 +165,7 @@ public class Pentago implements Observable {
      * @return true if the game is over.
      */
     public boolean isOver() {
-        System.out.println("isOver? " + didAnyoneWin());
-        return didAnyoneWin();
+        return didAnyoneWin() || board.isFull();
     }
     
     /**

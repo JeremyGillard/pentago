@@ -4,7 +4,6 @@ import g49803.atl.pentago.model.Pentago;
 import g49803.atl.pentago.model.State;
 import g49803.atl.pentago.util.Observer;
 import javafx.animation.RotateTransition;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
@@ -71,16 +70,16 @@ public class QuadrantFrame extends StackPane implements Observer {
             for (int j = 0; j < 3; j++) {
                 switch (quadrantNumber) {
                     case 0:
-                        piecePlacement.add(new PieceComponent(quadrantNumber, i, j, this.pentago, lightingEffet), i, j);
+                        piecePlacement.add(new PieceComponent(i, j, this.pentago, lightingEffet), i, j);
                         break;
                     case 1:
-                        piecePlacement.add(new PieceComponent(quadrantNumber, i+3, j, this.pentago, lightingEffet), i, j);
+                        piecePlacement.add(new PieceComponent(i+3, j, this.pentago, lightingEffet), i, j);
                         break;
                     case 2:
-                        piecePlacement.add(new PieceComponent(quadrantNumber, i, j+3, this.pentago, lightingEffet), i, j);
+                        piecePlacement.add(new PieceComponent(i, j+3, this.pentago, lightingEffet), i, j);
                         break;
                     default:
-                        piecePlacement.add(new PieceComponent(quadrantNumber, i+3, j+3, this.pentago, lightingEffet), i, j);
+                        piecePlacement.add(new PieceComponent(i+3, j+3, this.pentago, lightingEffet), i, j);
                         break;
                 }
             }
@@ -98,11 +97,9 @@ public class QuadrantFrame extends StackPane implements Observer {
         if (pentago.getCurrentGameState() == State.ROTATION) {
             if (pentago.getLastQuadrantRotated() == quadrantNumber) {
                 if (pentago.isLastRotationClockwise()) {
-                    System.out.println("TEST 90");
                     transition.setByAngle(90);
                     piecePlacement.setRotate(piecePlacement.getRotate() - 90);
                 } else {
-                    System.out.println("TEST-90");
                     transition.setByAngle(-90);
                     piecePlacement.setRotate(piecePlacement.getRotate() + 90);
                 }
