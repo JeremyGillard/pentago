@@ -10,7 +10,7 @@ NB: (small rule change) even if two players have lined up 5 balls after turning 
 
 ## Model Structure
 
-There are four main parts to this project:
+There are **4** main parts to this project:
 + The part to manage the console view (g49803.atl.pentago.**console**)
 + The part to manage the graphical view (g49803.atl.pentago.**gui**)
 + An utility part (g49803.atl.pentago.**util**) 
