@@ -16,6 +16,14 @@ There are **4** main parts to this project:
 + An utility part (g49803.atl.pentago.**util**) 
 + And finally the most important part, the model of our game (g49803.atl.pentago.**model**).
 
+```
+public class Author {
+    public static void main(String[] args) {
+        System.out.println("Pentago v1.0 finished. Have Fun !");
+    }
+}
+```
+
 ## Additional Informations
 
 Java build tool used: Ant
@@ -23,6 +31,8 @@ Java build tool used: Ant
 ### Code (additional information - comments)
 
 Only small inconsistency between the console view and the graphical view. I had to put the isOver check in the ball placement and quadrant rotation methods for the mistletoe while for the console view, the isOver method is used for the controller loop.
+
+For a more pleasant gaming experience, it is possible on most operating systems to uncomment line 20: initSurroundingMusic().
 
 ### Other
 The commits structure are highly inspired by the Angular "Commit Message Conventions".
