@@ -16,7 +16,7 @@ There are **4** main parts to this project:
 + An utility part (g49803.atl.pentago.**util**) 
 + And finally the most important part, the model of our game (g49803.atl.pentago.**model**).
 
-```
+```java
 public class Author {
     public static void main(String[] args) {
         System.out.println("Pentago v1.0 finished. Have Fun !");
