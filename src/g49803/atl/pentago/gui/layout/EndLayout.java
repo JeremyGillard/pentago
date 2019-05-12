@@ -34,11 +34,10 @@ public class EndLayout extends StackPane {
     /**
      * Allows to create the end layout of the pentago game.
      * 
-     * @param winnerName the name of the potential winner.
+     * @param message the message to display.
      */
-    public EndLayout(String winnerName) {
-        winnerSounds();
-        initWinnerLabel(winnerName);
+    public EndLayout(String message) {
+        initWinnerLabel(message);
         initVisual();
         ButtonComponent buttonQuit = new ButtonComponent("Quit");
         ButtonComponent buttonRestart = new ButtonComponent("Restart");
@@ -74,19 +73,10 @@ public class EndLayout extends StackPane {
         endRoot.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 50, 0.4), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
-    private void initWinnerLabel(String winnerName) {
-        winnerLabel = new Label("The winner is : " + winnerName +"\n      Congratulation !!");
+    private void initWinnerLabel(String message) {
+        winnerLabel = new Label(message);
         winnerLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 40));
         winnerLabel.setTextFill(Color.rgb(68, 25, 7));
-    }
-    
-    private void winnerSounds() {
-        AudioClip sound1 = new AudioClip("file:media/sound/endGame.wav");
-        sound1.setVolume(0.2);
-        sound1.play();
-        AudioClip sound2 = new AudioClip("file:media/sound/winnerVoice.wav");
-        sound2.setVolume(0.2);
-        sound2.play();
     }
     
 }

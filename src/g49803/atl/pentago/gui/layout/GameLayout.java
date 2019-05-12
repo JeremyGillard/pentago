@@ -20,6 +20,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -117,13 +118,26 @@ public class GameLayout extends VBox implements Observer {
         if (pentago.getCurrentGameState() == State.ROTATION) {
             blackPlayerFrame.highlight();
             whitePlayerFrame.highlight();
-        } else if (pentago.getCurrentGameState() == State.OVER) {
-            sceneChange();
+        } else if (pentago.getCurrentGameState() == State.OVERWINNER) {
+            sceneChange("The winner is : " + pentago.getCurrentPlayer().getName() +"\n      Congratulation !!");
+            winnerSounds();
+        } else if (pentago.getCurrentGameState() == State.OVERNOWINNER) {
+            sceneChange("There is no winner for this round...\n\t\t Take revenge?!");
         }
     }
     
-    private void sceneChange() {
-        EndLayout endLayout = new EndLayout(pentago.getCurrentPlayer().getName());
+    private void sceneChange(String endMessage) {
+        EndLayout endLayout = new EndLayout(endMessage);
         this.getScene().setRoot(endLayout);
     }
+    
+    private void winnerSounds() {
+        AudioClip sound1 = new AudioClip("file:media/sound/endGame.wav");
+        sound1.setVolume(0.2);
+        sound1.play();
+        AudioClip sound2 = new AudioClip("file:media/sound/winnerVoice.wav");
+        sound2.setVolume(0.2);
+        sound2.play();
+    }
+    
 }

@@ -9,7 +9,8 @@ public enum State {
     
     PLACEMENT("place a marble"),
     ROTATION("turn a quadrant"),
-    OVER("finish the game");
+    OVERWINNER("finish the game (with winner)"),
+    OVERNOWINNER("finish the game (no winner)");
     
     private final String communicationSate;
     

@@ -141,10 +141,12 @@ public class Board {
     boolean isFull() {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
+                System.out.print((getMarbleAtPosition(i, j) == null) ? "T " : "F ");
                 if (getMarbleAtPosition(i, j) == null) {
                     return false;
                 }
             }
+            System.out.println("");
         }
         return true;
     }

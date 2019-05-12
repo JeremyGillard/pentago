@@ -94,9 +94,7 @@ public class Pentago implements Observable {
                     + "are outside the area covered by the board");
         }
         board.fillCell(x, y, currentPlayer.getColor());
-        if (didAnyoneWin()) {
-            state = State.OVER;
-        }
+        isOver();
         this.notifyObservers();
         state = State.ROTATION;
     }
@@ -117,9 +115,7 @@ public class Pentago implements Observable {
         board.turnQuadrant(quadrantNumber, clockwiseDirection);
         lastQuadrantRotated = quadrantNumber;
         isLastRotationClockwise = clockwiseDirection;
-        if (didAnyoneWin()) {
-            state = State.OVER;
-        }
+        isOver();
         this.notifyObservers();
         nextPlayer();
     }
@@ -155,7 +151,11 @@ public class Pentago implements Observable {
      * @return true if a player has won.
      */
     boolean didAnyoneWin() {
-        return board.checkWinAlignmentFor(currentPlayer.getColor(), BOARD_SIDE) != null;
+        if (board.checkWinAlignmentFor(currentPlayer.getColor(), BOARD_SIDE) != null) {
+            state = State.OVERWINNER;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -164,7 +164,11 @@ public class Pentago implements Observable {
      * @return true if the game is over.
      */
     public boolean isOver() {
-        return didAnyoneWin() || board.isFull();
+        if (board.isFull()) {
+            state = State.OVERNOWINNER;
+            return true;
+        }
+        return didAnyoneWin();
     }
     
     /**
