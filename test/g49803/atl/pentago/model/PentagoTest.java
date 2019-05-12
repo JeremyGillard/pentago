@@ -1,12 +1,7 @@
 package g49803.atl.pentago.model;
 
-import g49803.atl.pentago.util.Observer;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
 
 /**
  *
@@ -57,7 +52,26 @@ public class PentagoTest {
         pentago.addNewPlayer("Bart");
         pentago.placeMarble(0, 0);
     }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void placeMarbleWrongCoord() {
+        Pentago pentago = new Pentago();
+        pentago.addNewPlayer("Homer");
+        pentago.addNewPlayer("Bart");
+        pentago.start();
+        pentago.placeMarble(10, 0);
+    }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void rotateInexistantQuadrant() {
+        Pentago pentago = new Pentago();
+        pentago.addNewPlayer("Homer");
+        pentago.addNewPlayer("Bart");
+        pentago.start();
+        pentago.placeMarble(0, 0);
+        pentago.rotateQuadrant(7, true);
+    }
+    
     @Test(expected = GameStateException.class)
     public void rotateQuadrantWrongState() {
         Pentago pentago = new Pentago();
@@ -75,6 +89,58 @@ public class PentagoTest {
         pentago.placeMarble(0, 0);
         pentago.rotateQuadrant(0, true);
         assertEquals(pentago.getCurrentPlayer().getName(), "Bart");
+    }
+    
+    @Test
+    public void nextPlayerTest() {
+        Pentago pentago = new Pentago();
+        pentago.addNewPlayer("Homer");
+        pentago.addNewPlayer("Bart");
+        pentago.start();
+        pentago.placeMarble(0, 0);
+        pentago.rotateQuadrant(0, true);
+        pentago.placeMarble(1, 0);
+        pentago.rotateQuadrant(0, true);
+        assertEquals(pentago.getCurrentPlayer().getName(), "Homer");
+    }
+    
+    @Test
+    public void getNbPlayerTest() {
+        Pentago pentago = new Pentago();
+        pentago.addNewPlayer("Homer");
+        pentago.addNewPlayer("Bart");
+        assertEquals(pentago.getNbPlayer(), 2);
+    }
+    
+    @Test
+    public void getCurrentGameStateTest() {
+        Pentago pentago = new Pentago();
+        pentago.addNewPlayer("Guillaume");
+        pentago.addNewPlayer("Amandine");
+        pentago.start();
+        assertEquals(pentago.getCurrentGameState(), State.PLACEMENT);
+    }
+    
+    @Test
+    public void getLastQuadrantRotatedTest() {
+        Pentago pentago = new Pentago();
+        pentago.addNewPlayer("Guillaume");
+        pentago.addNewPlayer("Amandine");
+        pentago.start();
+        pentago.placeMarble(0, 0);
+        pentago.rotateQuadrant(0, true);
+        assertEquals(pentago.getLastQuadrantRotated(), 0);
+    }
+    
+    @Test
+    public void isLastRotationClockwiseTest() {
+        Pentago pentago = new Pentago();
+        pentago.addNewPlayer("Guillaume");
+        pentago.addNewPlayer("Amandine");
+        pentago.start();
+        pentago.placeMarble(0, 0);
+        pentago.rotateQuadrant(0, true);
+        assertTrue(pentago.isLastRotationClockwise());
     }
     
 }

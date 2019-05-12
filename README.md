@@ -10,11 +10,19 @@ NB: (small rule change) even if two players have lined up 5 balls after turning 
 
 ## Model Structure
 
+There are four main parts to this project:
++ The part to manage the console view (g49803.atl.pentago.**console**)
++ The part to manage the graphical view (g49803.atl.pentago.**gui**)
++ An utility part (g49803.atl.pentago.**util**) 
++ And finally the most important part, the model of our game (g49803.atl.pentago.**model**).
+
 ## Additional Informations
 
 Java build tool used: Ant
 
 ### Code (additional information - comments)
+
+Only small inconsistency between the console view and the graphical view. I had to put the isOver check in the ball placement and quadrant rotation methods for the mistletoe while for the console view, the isOver method is used for the controller loop.
 
 ### Other
 The commits structure are highly inspired by the Angular "Commit Message Conventions".

@@ -16,11 +16,10 @@ public class App extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        initSurroundingMusic();
+        //Atmosphere work for more immersion in the game.
+//        initSurroundingMusic(); //To be uncommented if the computer is able to load the file.
         
         Pentago pentago = new Pentago();
-        ConsolView consolView = new ConsolView(pentago); // A RETIRER
-        pentago.addObserver(consolView); // A RETIRER
         
         IntroductionLayout introLayout = new IntroductionLayout(pentago);
         

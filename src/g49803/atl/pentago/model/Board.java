@@ -91,9 +91,6 @@ public class Board {
     Marble checkAlignment(int x, int y, int dx, int dy, int size) {
         Marble value = getMarbleAtPosition(x, y);
         int index = 0;
-        if (value != null) {
-             index = 1;
-        }
         while (x < boardSize && x >= 0 && y < boardSize && y >= 0) {
             if (value == getMarbleAtPosition(x, y)) {
                 index++;

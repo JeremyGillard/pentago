@@ -123,6 +123,7 @@ public class GameLayout extends VBox implements Observer {
             winnerSounds();
         } else if (pentago.getCurrentGameState() == State.OVERNOWINNER) {
             sceneChange("There is no winner for this round...\n\t\t Take revenge?!");
+            noWinnerSounds();
         }
     }
     
@@ -138,6 +139,12 @@ public class GameLayout extends VBox implements Observer {
         AudioClip sound2 = new AudioClip("file:media/sound/winnerVoice.wav");
         sound2.setVolume(0.2);
         sound2.play();
+    }
+    
+    private void noWinnerSounds() {
+        AudioClip sound1 = new AudioClip("file:media/sound/revenge.wav");
+        sound1.setVolume(0.1);
+        sound1.play();
     }
     
 }
