@@ -27,6 +27,7 @@ public class Author {
 ## Additional Informations
 
 Java build tool used: Ant
+Jdk version: 1.8
 
 ### Code (additional information - comments)
 
