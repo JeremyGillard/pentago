@@ -1,6 +1,6 @@
 # Pentago <img src="./media/img/icon.png" width="40" height="40"> 
 
-<img src="./media/img/capture.png" width="850">
+<img src="./media/img/capture.png" width="900">
 
 ## Description
 
