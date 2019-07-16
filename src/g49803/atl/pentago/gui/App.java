@@ -17,7 +17,9 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         //Atmosphere work for more immersion in the game.
-//        initSurroundingMusic(); //To be uncommented if the computer is able to load the file.
+        // Commented because the wav file was too large for a remote. 
+        //cf: remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com    
+        //initSurroundingMusic();
         
         Pentago pentago = new Pentago();
         
