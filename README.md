@@ -11,10 +11,10 @@ NB: (small rule change) even if two players have lined up 5 balls after turning 
 ## Model Structure
 
 There are **4** main parts to this project:
-+ The part to manage the console view (g49803.atl.pentago.**console**)
-+ The part to manage the graphical view (g49803.atl.pentago.**gui**)
-+ An utility part (g49803.atl.pentago.**util**) 
-+ And finally the most important part, the model of our game (g49803.atl.pentago.**model**).
++ The part to manage the console view (be.jeremygillard.pentago.**console**)
++ The part to manage the graphical view (be.jeremygillard.pentago.**gui**)
++ An utility part (be.jeremygillard.pentago.**util**) 
++ And finally the most important part, the model of our game (be.jeremygillard.pentago.**model**).
 
 ```java
 public class Author {
