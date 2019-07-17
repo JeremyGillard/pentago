@@ -36,7 +36,7 @@ Jdk version: 1.8
 
 Only small inconsistency between the console view and the graphical view. I had to put the isOver check in the ball placement and quadrant rotation methods for the mistletoe while for the console view, the isOver method is used for the controller loop.
 
-For a more pleasant gaming experience, it is possible on most operating systems to uncomment line 20: initSurroundingMusic().
+(Cancelled due to the size of the wav file: file not included). For a more pleasant gaming experience, it is possible on most operating systems to uncomment line 20 in be.jeremygillard.pentago.gui.App : initSurroundingMusic().
 
 ### Other
 The commits structure are highly inspired by the Angular "Commit Message Conventions".
