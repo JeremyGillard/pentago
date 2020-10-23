@@ -15,8 +15,11 @@ NB: (small rule change) even if two players have lined up 5 balls after turning 
 **Language**
 - Java version: 1.8
 
+**Framework/Library**
+- JavaFX
+
 **Build tool**
-- Ant version: 
+- Ant
 
 ## Additional Informations
 
