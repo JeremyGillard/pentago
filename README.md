@@ -21,6 +21,8 @@ NB: (small rule change) even if two players have lined up 5 balls after turning 
 **Build tool**
 - Ant
 
+## Setup
+
 ## Additional Informations
 
 ### Code (additional information - comments)
