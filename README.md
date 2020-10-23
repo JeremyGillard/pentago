@@ -25,12 +25,15 @@ public class Author {
     }
 }
 ```
+## Technologies
+
+**Language**
+- Java version: 1.8
+
+**Build tool**
+- Ant version: 
 
 ## Additional Informations
-
-Java build tool used: Ant
-
-Jdk version: 1.8
 
 ### Code (additional information - comments)
 
