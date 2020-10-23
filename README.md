@@ -10,21 +10,6 @@ See more rules informations [here](PentagoRulesStrategy.pdf).
 
 NB: (small rule change) even if two players have lined up 5 balls after turning a quadrant, only the current player will be designated as the winner.
 
-## Model Structure
-
-There are **4** main parts to this project:
-+ The part to manage the console view (be.jeremygillard.pentago.**console**)
-+ The part to manage the graphical view (be.jeremygillard.pentago.**gui**)
-+ An utility part (be.jeremygillard.pentago.**util**) 
-+ And finally the most important part, the model of our game (be.jeremygillard.pentago.**model**).
-
-```java
-public class Author {
-    public static void main(String[] args) {
-        System.out.println("Pentago v1.0 finished. Have Fun !");
-    }
-}
-```
 ## Technologies
 
 **Language**
@@ -40,6 +25,22 @@ public class Author {
 Only small inconsistency between the console view and the graphical view. I had to put the isOver check in the ball placement and quadrant rotation methods for the mistletoe while for the console view, the isOver method is used for the controller loop.
 
 (Cancelled due to the size of the wav file: file not included). For a more pleasant gaming experience, it is possible on most operating systems to uncomment line 20 in be.jeremygillard.pentago.gui.App : initSurroundingMusic().
+
+## Model Structure
+
+There are **4** main parts to this project:
++ The part to manage the console view (be.jeremygillard.pentago.**console**)
++ The part to manage the graphical view (be.jeremygillard.pentago.**gui**)
++ An utility part (be.jeremygillard.pentago.**util**) 
++ And finally the most important part, the model of our game (be.jeremygillard.pentago.**model**).
+
+```java
+public class Author {
+    public static void main(String[] args) {
+        System.out.println("Pentago v1.0 finished. Have Fun !");
+    }
+}
+```
 
 ### Other
 The commits structure are highly inspired by the Angular "Commit Message Conventions".
