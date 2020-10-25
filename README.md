@@ -17,6 +17,7 @@ NB: (small rule change) even if two players have lined up 5 balls after turning 
 
 **Framework/Library**
 - JavaFX
+- JUnit 4
 
 **Build tool**
 - Ant
