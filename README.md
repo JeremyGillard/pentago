@@ -72,4 +72,6 @@ NB: (Customization) In my projects, I will try at best to refer to parts of Mode
 
 [For more information](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#file-commit-md)
 
+### Dev tips
 
+[Setting up Javafx](https://openjfx.io/openjfx-docs/#introduction)
