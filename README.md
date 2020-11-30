@@ -74,5 +74,5 @@ NB: (Customization) In my projects, I will try at best to refer to parts of Mode
 
 ### Dev tips
 
-[Setting up Javafx](https://openjfx.io/openjfx-docs/#introduction)
+[Setting up Javafx](https://openjfx.io/openjfx-docs/#introduction)  
 [Git lfs migration](https://notiz.dev/blog/migrate-git-repo-to-git-lfs#4-migrate-git-history)
