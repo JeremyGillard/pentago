@@ -1,5 +1,7 @@
 # Pentago <img src="./media/img/icon.png" width="40" height="40"> 
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 <img src="./media/img/capture.png" width="900">
 
 ## Description
@@ -13,16 +15,25 @@ NB: (small rule change) even if two players have lined up 5 balls after turning 
 ## Technologies
 
 **Language**
-- Java version: 1.8
+- Java version: 11
 
 **Framework/Library**
-- JavaFX
-- JUnit 4
+- JavaFX version: 11
+- JUnit version: 4
 
 **Build tool**
-- Ant
+- Maven version: 3.6.x
 
 ## Setup
+
+To run this little game, you will need at least [Java 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) and [Maven 3](https://maven.apache.org/download.cgi) on your machine.
+
+```
+git clone https://github.com/JeremyGillard/pentago-game.git
+cd pentago-game
+mvn javafx:compile
+mvn javafx:run
+```
 
 ## Additional Informations
 
@@ -43,7 +54,7 @@ There are **4** main parts to this project:
 ```java
 public class Author {
     public static void main(String[] args) {
-        System.out.println("Pentago v1.0 finished. Have Fun !");
+        System.out.println("Pentago v2.0 finished. Have Fun !");
     }
 }
 ```
@@ -61,11 +72,4 @@ NB: (Customization) In my projects, I will try at best to refer to parts of Mode
 
 [For more information](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#file-commit-md)
 
-In the future, I would also like to draw inspiration from the advice given in [this article](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project) in my future projects.
-
-## Licensing
-
-This app is Licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE) for the full license text.
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
