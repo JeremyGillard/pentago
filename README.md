@@ -1,4 +1,4 @@
-# Pentago <img src="./media/img/icon.png" width="40" height="40"> 
+# Pentago - school project <img src="./media/img/icon.png" width="40" height="40"> 
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Maven CI](https://github.com/JeremyGillard/pentago-game/workflows/Maven%20CI/badge.svg)
